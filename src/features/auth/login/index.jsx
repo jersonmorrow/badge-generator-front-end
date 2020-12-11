@@ -35,33 +35,62 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Log in</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="login-email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="login-email"
-          autoComplete="email"
-          ref={register({
-            required: true,
-          })}
-        />
+    <div className="column is-one-third">
+      <div className="box box-padding">
+        <h4 className="title is-4">Log in</h4>
+        <div className="field has-addons-right">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="field">
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-normal"
+                  type="email"
+                  name="email"
+                  id="login-email"
+                  autoComplete="email"
+                  placeholder="Email"
+                  ref={register({
+                    required: true,
+                  })}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+                <span className="icon is-small is-right">
+                  <i className="fas fa-check"></i>
+                </span>
+              </div>
+            </div>
 
-        <label htmlFor="login-password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="login-password"
-          autoComplete="password"
-          ref={register({
-            required: true,
-          })}
-        />
-
-        <input type="submit" value="Log in" />
-      </form>
+            <div className="field">
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-normal"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  id="login-password"
+                  autoComplete="password"
+                  ref={register({
+                    required: true,
+                  })}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-lock"></i>
+                </span>
+                <span className="icon is-small is-right">
+                  <i className="fas fa-check"></i>
+                </span>
+              </div>
+            </div>
+            <div className="control">
+              <button type="submit" class="button is-link">
+                Log in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
