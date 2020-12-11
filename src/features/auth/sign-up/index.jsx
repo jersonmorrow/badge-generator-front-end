@@ -3,9 +3,10 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
+import { checkUser } from '../../services/checkUser';
 
 function SignUp() {
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, formState, getValues } = useForm({
     mode: 'onBlur',
   });
 
@@ -90,8 +91,14 @@ function SignUp() {
                       value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                       message: 'error message',
                     },
+                    validate: checkUser || 'error message',
                   })}
                 />
+                {errors.email?.type === 'validate' && (
+                  <p className="help is-danger">
+                    This email address is already in use
+                  </p>
+                )}
 
                 {errors.email?.type === 'pattern' && (
                   <p className="help is-danger">
@@ -141,9 +148,16 @@ function SignUp() {
                   type="password"
                   name="passwordCheck"
                   id="signup-passwordCheck"
-                  placeholder="Verify Password"
-                  ref={register({ required: true })}
+                  placeholder="Confirm Password"
+                  ref={register({
+                    required: true,
+                    validate: (value) =>
+                      value === getValues('password') || 'error message',
+                  })}
                 />
+                {errors.passwordCheck?.type === 'validate' && (
+                  <p className="help is-danger">Password fields don't match</p>
+                )}
                 {errors.passwordCheck?.type === 'required' && (
                   <p className="help is-danger">This is a required field</p>
                 )}
