@@ -25,6 +25,9 @@ $body-background-color: $beige-lighter;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
+$notification-padding: 0.5rem 2.5rem 0.5rem 1.5rem;
+$notification-padding-ltr: 0.5rem 2.5rem 0.5rem 1.5rem;
+$notification-padding-rtl: 0.5rem 2.5rem 0.5rem 1.5rem;
 
 // Import only what you need from Bulma
 @import '../node_modules/bulma/sass/utilities/_all.sass';

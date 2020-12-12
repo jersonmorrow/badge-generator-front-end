@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
+import { checkUserLogin } from '../../services/checkUser';
+import ErrorNotice from '../../misc/ErrorNotice';
 
 function Login() {
   const { register, handleSubmit, errors, formState } = useForm({
     mode: 'onBlur',
   });
+  const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
@@ -30,7 +33,7 @@ function Login() {
       localStorage.setItem('auth-token', loginResponse.data.token);
       history.push('/');
     } catch (error) {
-      console.log(error);
+      error.response.data.msg && setError(error.response.data.msg);
     }
   };
 
@@ -38,6 +41,9 @@ function Login() {
     <div className="column is-one-third">
       <div className="box box-padding">
         <h4 className="title is-4">Log in</h4>
+        {error && (
+          <ErrorNotice message={error} clearError={() => setError(undefined)} />
+        )}
         <div className="field has-addons-right">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="field">
@@ -51,6 +57,7 @@ function Login() {
                   placeholder="Email"
                   ref={register({
                     required: true,
+                    validate: checkUserLogin || 'error message',
                   })}
                 />
                 <span className="icon is-small is-left">
@@ -59,6 +66,16 @@ function Login() {
                 <span className="icon is-small is-right">
                   <i className="fas fa-check"></i>
                 </span>
+
+                {errors.email?.type === 'validate' && (
+                  <p className="help is-danger">
+                    No account with this email exists
+                  </p>
+                )}
+
+                {errors.email?.type === 'required' && (
+                  <p className="help is-danger">This is a required field</p>
+                )}
               </div>
             </div>
 
@@ -81,10 +98,18 @@ function Login() {
                 <span className="icon is-small is-right">
                   <i className="fas fa-check"></i>
                 </span>
+
+                {errors.password?.type === 'required' && (
+                  <p className="help is-danger">This is a required field</p>
+                )}
               </div>
             </div>
             <div className="control">
-              <button type="submit" class="button is-link">
+              <button
+                type="submit"
+                class="button is-link"
+                disabled={!formState.isValid}
+              >
                 Log in
               </button>
             </div>
