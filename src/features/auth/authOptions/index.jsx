@@ -18,13 +18,19 @@ function AuthOptions() {
   };
 
   return (
-    <div>
+    <div className="buttons">
       {userData.user ? (
-        <button onClick={logout}>Log out</button>
+        <button className="button is-light" onClick={logout}>
+          Log out
+        </button>
       ) : (
         <div>
-          <button onClick={signup}>Sign-up</button>
-          <button onClick={login}>Log in</button>
+          <button className="button is-primary" onClick={signup}>
+            <strong>Sign-up</strong>
+          </button>
+          <button className="button is-light" onClick={login}>
+            Log in
+          </button>
         </div>
       )}
     </div>
