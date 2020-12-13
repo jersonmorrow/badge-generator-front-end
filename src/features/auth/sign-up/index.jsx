@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
@@ -172,6 +172,11 @@ function SignUp() {
               >
                 Sign up
               </button>
+            </div>
+
+            <div class="has-text-centered">
+              Alreadyt have an account?
+              <Link to="./login">Sign in</Link>
             </div>
           </form>
         </div>
