@@ -6,6 +6,7 @@ import Login from './features/auth/login';
 import SignUp from './features/auth/sign-up';
 import UserContext from './features/context/userContext';
 import Layout from './features/layout/Layout';
+import Events from './pages/Events';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/events" component={Events} />
           </Switch>
         </Layout>
       </UserContext.Provider>
