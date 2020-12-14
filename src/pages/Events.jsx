@@ -3,9 +3,14 @@ import EventsList from '../features/events/eventsList';
 
 function Events() {
   return (
-    <div>
-      <EventsList />
-    </div>
+    <section className="section">
+      <div className="container mx-6">
+        <div className="is-flex is-justify-content-flex-end	">
+          <button className="button is-success">New Event</button>
+        </div>
+        <EventsList />
+      </div>
+    </section>
   );
 }
 

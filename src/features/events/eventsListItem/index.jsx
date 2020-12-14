@@ -3,24 +3,39 @@ import eventImage from '../../../images/event-image.jpg';
 
 function EventsListItem() {
   return (
-    <div>
+    <div className="is-flex is-align-items-center">
       <div>
-        <img src={eventImage} alt="event-image" width="100" />
+        <figure className="image is-96x96">
+          <img
+            width="96px"
+            className="is-rounded is-vcentered"
+            src={eventImage}
+            alt="event-image"
+          />
+        </figure>
       </div>
-      <div>
+
+      <div className="mx-4">
         <strong>
-          <h3>Event Title</h3>
+          <p className="title is-5">F8 Conference</p>
         </strong>
-        <br />
-        <h4>Organizer</h4>
-        <br />
-        <h6>Time</h6>
-        <br />
-        <h6>Location</h6>
+        <p className="subtitle is-6 m-0">Facebook</p>
+        <p className="subtitle is-6 m-0">24 September</p>
+        <p className="subtitle is-6 m-0">San Jose California, ave</p>
       </div>
-      <div>
-        <button>Create Event Badge</button>
-        <button>Delete Event</button>
+
+      <div className="field is-grouped">
+        <p className="control">
+          <button className="button is-success is-normal">
+            Create Event Badge
+          </button>
+        </p>
+        <p className="control">
+          <button className="button is-primary is-normal">Edit Event</button>
+        </p>
+        <p className="control">
+          <button className="button is-danger is-normal">Delete Event</button>
+        </p>
       </div>
     </div>
   );
