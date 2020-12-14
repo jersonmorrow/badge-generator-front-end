@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchEvents from '../features/events/searchEvents';
+import EventsList from '../features/events/eventsList';
 
 function Events() {
   return (
     <div>
-      <SearchEvents />
+      <EventsList />
     </div>
   );
 }
