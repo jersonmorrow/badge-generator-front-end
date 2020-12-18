@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import EventsList from '../features/events/eventsList';
 
 function Events() {
@@ -6,7 +7,9 @@ function Events() {
     <section className="section">
       <div className="container mx-6">
         <div className="is-flex is-justify-content-flex-end	">
-          <button className="button is-success">New Event</button>
+          <Link to="/new-event">
+            <button className="button is-success">New Event</button>
+          </Link>
         </div>
         <EventsList />
       </div>

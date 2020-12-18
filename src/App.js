@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import NewEvent from './pages/NewEvent';
+import Events from './pages/Events';
 import Login from './features/auth/login';
 import SignUp from './features/auth/sign-up';
 import UserContext from './features/context/userContext';
 import Layout from './features/layout/Layout';
-import Events from './pages/Events';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -49,6 +50,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/events" component={Events} />
+            <Route path="/new-event" component={NewEvent} />
           </Switch>
         </Layout>
       </UserContext.Provider>
