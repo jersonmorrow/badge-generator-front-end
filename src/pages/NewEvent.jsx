@@ -1,7 +1,28 @@
 import React from 'react';
 import EventForm from '../features/events/eventForm';
+import { useForm } from 'react-hook-form';
+import api from '../api';
+import { useHistory } from 'react-router-dom';
 
 function NewEvent() {
+  const { register, handleSubmit, control, errors } = useForm({
+    mode: 'onChanges',
+    reValidateMode: 'onChange',
+  });
+
+  const history = useHistory();
+
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+    try {
+      await api.events.create(data);
+
+      history.push('/events');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="container is-flex is-justify-content-center mx-6">
@@ -11,7 +32,12 @@ function NewEvent() {
               <p className="title is-5">Create a New Event</p>
             </strong>
           </div>
-          <EventForm />
+          <EventForm
+            onSubmit={handleSubmit(onSubmit)}
+            register={register}
+            errors={errors}
+            control={control}
+          />
         </div>
       </div>
     </React.Fragment>

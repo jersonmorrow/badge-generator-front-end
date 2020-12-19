@@ -1,37 +1,14 @@
 import React, { useRef } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-function EventForm() {
-  const { register, handleSubmit, control, errors } = useForm({
-    mode: 'onChanges',
-    reValidateMode: 'onChange',
-  });
-
-  const uploadedImage = useRef(null);
-  const imageUploader = useRef(null);
-
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+function EventForm(props) {
+  const { onSubmit, register, errors, control } = props;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={onSubmit}>
       <div className="columns">
         <div className="column">
           <div className="field">
@@ -111,36 +88,28 @@ function EventForm() {
         <div className="column is-flex">
           <div className="is-flex-direction-column is-align-items-center is-justify-content-center	">
             <input
-              className="file-input"
+              className="input"
               type="file"
               accept="image/*"
               multiple="false"
               name="img"
-              ref={(register, imageUploader)}
-              onChange={handleImageUpload}
-              style={{ display: 'none' }}
+              ref={register}
+              isClearable
             />
-            <div
-              className="box is-clickable is-flex is-justify-content-center is-align-items-center"
-              onClick={() => imageUploader.current.click()}
-            >
-              <img width="70" ref={uploadedImage} />
-            </div>
-            <h6 class="title is-6">Upload Image...</h6>
           </div>
         </div>
+      </div>
 
-        <div className="field is-grouped">
-          <Link to="/events" className="control">
-            <button className="button is-danger is-normal">Cancel</button>
-          </Link>
+      <div className="field is-grouped">
+        <Link to="/events" className="control">
+          <button className="button is-danger is-normal">Cancel</button>
+        </Link>
 
-          <p className="control">
-            <button type="submit" className="button is-success is-normal">
-              Create event
-            </button>
-          </p>
-        </div>
+        <p className="control">
+          <button type="submit" className="button is-success is-normal">
+            Create event
+          </button>
+        </p>
       </div>
     </form>
   );
