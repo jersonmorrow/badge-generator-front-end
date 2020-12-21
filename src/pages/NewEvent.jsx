@@ -14,8 +14,18 @@ function NewEvent() {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
+
+    const { title, organizer, location, date, img } = data;
+
+    const payload = new FormData();
+    payload.append('title', title);
+    payload.append('organizer', organizer);
+    payload.append('location', location);
+    payload.append('date', date);
+    payload.append('eventImage', img[0]);
+
     try {
-      await api.events.create(data);
+      await api.events.create(payload);
 
       history.push('/events');
     } catch (error) {

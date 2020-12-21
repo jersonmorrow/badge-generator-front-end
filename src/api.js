@@ -4,11 +4,6 @@ let token = localStorage.getItem('auth-token');
 
 const instance = Axios.create({
   baseURL: 'http://localhost:5000',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-    'x-auth-token': token,
-  },
 });
 
 async function callApi(endpoint, options) {
@@ -25,7 +20,15 @@ const api = {
     },
     create(event) {
       const data = event;
-      return callApi('/events/new-event', { method: 'POST', data });
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'x-auth-token': token,
+        },
+        method: 'POST',
+        data: data,
+      };
+      return callApi('/events/new-event', config);
     },
   },
 };

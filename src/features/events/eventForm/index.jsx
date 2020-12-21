@@ -8,7 +8,7 @@ function EventForm(props) {
   const { onSubmit, register, errors, control } = props;
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} encType="multipart/form-data">
       <div className="columns">
         <div className="column">
           <div className="field">
@@ -90,11 +90,10 @@ function EventForm(props) {
             <input
               className="input"
               type="file"
-              accept="image/*"
+              accept="image/png, image/jpeg"
               multiple="false"
               name="img"
               ref={register}
-              isClearable
             />
           </div>
         </div>
