@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 function EventForm(props) {
-  const { onSubmit, register, errors, control } = props;
+  const { onSubmit, register, errors, control, formState } = props;
 
   return (
     <form onSubmit={onSubmit} encType="multipart/form-data">
@@ -16,7 +16,7 @@ function EventForm(props) {
               <input
                 className="input"
                 type="text"
-                placeholder="Event title"
+                placeholder="*Event title"
                 name="title"
                 ref={register({
                   required: true,
@@ -33,7 +33,7 @@ function EventForm(props) {
               <input
                 className="input"
                 type="text"
-                placeholder="Organizer"
+                placeholder="*Organizer"
                 name="organizer"
                 ref={register({
                   required: true,
@@ -74,7 +74,7 @@ function EventForm(props) {
                 onChange={onChange}
                 onBlur={onBlur}
                 selected={value}
-                placeholderText="Click to select Date"
+                placeholderText="*Click to select Date"
                 todayButton="Today"
                 isClearable
               />
@@ -87,6 +87,7 @@ function EventForm(props) {
 
         <div className="column is-flex">
           <div className="is-flex-direction-column is-align-items-center is-justify-content-center	">
+            <p>Event Image (Optional)</p>
             <input
               className="input"
               type="file"
@@ -105,7 +106,11 @@ function EventForm(props) {
         </Link>
 
         <p className="control">
-          <button type="submit" className="button is-success is-normal">
+          <button
+            type="submit"
+            className="button is-success is-normal"
+            disabled={!formState.isValid}
+          >
             Create event
           </button>
         </p>

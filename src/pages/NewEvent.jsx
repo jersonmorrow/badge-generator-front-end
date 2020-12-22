@@ -5,8 +5,8 @@ import api from '../api';
 import { useHistory } from 'react-router-dom';
 
 function NewEvent() {
-  const { register, handleSubmit, control, errors } = useForm({
-    mode: 'onChanges',
+  const { register, handleSubmit, control, errors, formState } = useForm({
+    mode: 'onChange',
     reValidateMode: 'onChange',
   });
 
@@ -47,6 +47,7 @@ function NewEvent() {
             register={register}
             errors={errors}
             control={control}
+            formState={formState}
           />
         </div>
       </div>
