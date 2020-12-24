@@ -1,5 +1,4 @@
 import React from 'react';
-import eventImage from '../../../images/event-image.jpg';
 
 function EventsListItem(props) {
   const { title, organizer, date, location, img } = props;
@@ -11,7 +10,7 @@ function EventsListItem(props) {
           <img
             width="96px"
             className="is-rounded is-vcentered"
-            src={eventImage}
+            src={img}
             alt="event-image"
           />
         </figure>
@@ -19,11 +18,11 @@ function EventsListItem(props) {
 
       <div className="mx-4">
         <strong>
-          <p className="title is-5">F8 Conference</p>
+          <p className="title is-5">{title}</p>
         </strong>
-        <p className="subtitle is-6 m-0">Facebook</p>
-        <p className="subtitle is-6 m-0">24 September</p>
-        <p className="subtitle is-6 m-0">San Jose California, ave</p>
+        <p className="subtitle is-6 m-0">{organizer}</p>
+        <p className="subtitle is-6 m-0">{date}</p>
+        <p className="subtitle is-6 m-0">{location}</p>
       </div>
 
       <div className="field is-grouped">
