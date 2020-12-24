@@ -1,7 +1,9 @@
 import React from 'react';
 import eventImage from '../../../images/event-image.jpg';
 
-function EventsListItem() {
+function EventsListItem(props) {
+  const { title, organizer, date, location, img } = props;
+
   return (
     <div className="is-flex is-align-items-center">
       <div>

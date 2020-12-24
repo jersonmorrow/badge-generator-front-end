@@ -11,7 +11,7 @@ function Events() {
             <button className="button is-success">New Event</button>
           </Link>
         </div>
-        <EventsList />
+        <EventsList badges={eventList} />
       </div>
     </section>
   );

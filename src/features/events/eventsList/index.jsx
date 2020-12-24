@@ -6,6 +6,8 @@ import SearchEvents from '../searchEvents';
 function EventsList(props) {
   const events = props.events;
 
+  // useSearchEvents() hook here!
+
   return (
     <React.Fragment>
       <div className="columns">
@@ -21,7 +23,7 @@ function EventsList(props) {
       <div className="box">
         <ul>
           <li>
-            <EventsListItem />
+            <EventsListItem event={events} />
           </li>
         </ul>
       </div>
