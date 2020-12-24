@@ -16,7 +16,13 @@ async function callApi(endpoint, options) {
 const api = {
   events: {
     list() {
-      return callApi('/events');
+      const config = {
+        headers: {
+          'x-auth-token': token,
+        },
+        method: 'GET',
+      };
+      return callApi('/events/', config);
     },
     create(event) {
       const data = event;
