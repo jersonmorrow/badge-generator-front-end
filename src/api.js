@@ -44,6 +44,15 @@ const api = {
       };
       return callApi('/events/new-event', config);
     },
+    remove(eventId) {
+      const config = {
+        headers: {
+          'x-auth-token': token,
+        },
+        method: 'DELETE',
+      };
+      return callApi(`/events/delete/${eventId}`, config);
+    },
   },
 };
 
