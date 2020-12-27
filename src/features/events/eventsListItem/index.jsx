@@ -31,7 +31,7 @@ function EventsListItem(props) {
           <img
             width="96px"
             className="is-rounded is-vcentered"
-            src={`http://localhost:5000/${image}`}
+            src={image}
             alt="event-image"
           />
         </figure>
