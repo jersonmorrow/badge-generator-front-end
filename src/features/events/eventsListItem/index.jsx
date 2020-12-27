@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import defaultImage from '../../../images/default-image.png';
 import Moment from 'moment';
+import DeleteEventModal from '../../modals/deleteEventModal';
+import useDeleteEvents from '../../../hooks/useDeleteEvent';
 
 function EventsListItem(props) {
+  const { eventItem } = props;
+
   const [image, setImage] = useState(defaultImage);
   const [date, setDate] = useState('');
-  const { eventItem } = props;
+
+  const { modal, setModal, handleDeleteEvent } = useDeleteEvents(eventItem);
 
   const getImage = () => {
     if (eventItem.eventImage) {
@@ -17,6 +22,14 @@ function EventsListItem(props) {
     const date = Date(eventItem.date);
     const formattedDate = Moment(date).format('LL');
     setDate(formattedDate);
+  };
+
+  const handleOpenModal = (e) => {
+    setModal(true);
+  };
+
+  const handleCloseModal = (e) => {
+    setModal(false);
   };
 
   useEffect(() => {
@@ -56,7 +69,17 @@ function EventsListItem(props) {
           <button className="button is-primary is-normal">Edit Event</button>
         </p>
         <p className="control">
-          <button className="button is-danger is-normal">Delete Event</button>
+          <button
+            onClick={handleOpenModal}
+            className="button is-danger is-normal"
+          >
+            Delete Event
+          </button>
+          <DeleteEventModal
+            isOpen={modal}
+            onClose={handleCloseModal}
+            onDeleteEvent={handleDeleteEvent}
+          />
         </p>
       </div>
     </div>
