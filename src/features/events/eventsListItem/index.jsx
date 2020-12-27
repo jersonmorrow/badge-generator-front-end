@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import defaultImage from '../../../images/default-image.png';
+import Moment from 'moment';
 
 function EventsListItem(props) {
-  const { title, organizer, date, location, img } = props;
+  const [image, setImage] = useState(defaultImage);
+  const [date, setDate] = useState('');
+  const { eventItem } = props;
+
+  const getImage = () => {
+    if (eventItem.eventImage) {
+      setImage(eventItem.eventImage);
+    }
+  };
+
+  const formatDate = () => {
+    const date = Date(eventItem.date);
+    const formattedDate = Moment(date).format('LL');
+    setDate(formattedDate);
+  };
+
+  useEffect(() => {
+    getImage();
+    formatDate();
+  });
 
   return (
     <div className="is-flex is-align-items-center">
@@ -10,7 +31,7 @@ function EventsListItem(props) {
           <img
             width="96px"
             className="is-rounded is-vcentered"
-            src={img}
+            src={`http://localhost:5000/${image}`}
             alt="event-image"
           />
         </figure>
@@ -18,11 +39,11 @@ function EventsListItem(props) {
 
       <div className="mx-4">
         <strong>
-          <p className="title is-5">{title}</p>
+          <p className="title is-5">{eventItem.title}</p>
         </strong>
-        <p className="subtitle is-6 m-0">{organizer}</p>
+        <p className="subtitle is-6 m-0">{eventItem.organizer}</p>
         <p className="subtitle is-6 m-0">{date}</p>
-        <p className="subtitle is-6 m-0">{location}</p>
+        <p className="subtitle is-6 m-0">{eventItem.location}</p>
       </div>
 
       <div className="field is-grouped">

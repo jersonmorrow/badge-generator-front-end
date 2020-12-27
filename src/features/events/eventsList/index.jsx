@@ -1,15 +1,14 @@
-import React, { ReactFragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useSearchEvents from '../../../hooks/useSearchEvents';
 import EventsListItem from '../eventsListItem';
 import SearchEvents from '../searchEvents';
 
 function EventsList(props) {
-  const events = props.events;
-
+  const { events } = props;
   const { query, setQuery, filteredEvents } = useSearchEvents(events);
 
-  if (filteredEvents.length === 0) {
+  if (!filteredEvents) {
     return (
       <div>
         <div className="columns">
@@ -28,24 +27,27 @@ function EventsList(props) {
 
   return (
     <div>
+      <div className="columns">
+        <div className="column">
+          <SearchEvents query={query} setQuery={setQuery} />
+        </div>
+      </div>
       <div className="mb-4">
         <strong>
           <p className="title is-5 ">Events</p>
         </strong>
       </div>
-      <div className="box">
-        <ul>
-          {filteredEvents.map((eventItem) => {
-            return (
-              <li>
-                <Link>
-                  <EventsListItem event={events} />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul className="mb-4 content">
+        {filteredEvents.map((eventItem) => {
+          return (
+            <li className="box" key={eventItem._id}>
+              <Link to={`/events/${eventItem._id}`}>
+                <EventsListItem eventItem={eventItem} />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
