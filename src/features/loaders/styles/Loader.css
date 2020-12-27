@@ -10,7 +10,7 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #000;
+  background: rgb(0, 95, 119);
   animation: lds-grid 1.2s linear infinite;
 }
 

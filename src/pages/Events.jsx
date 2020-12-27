@@ -4,10 +4,12 @@ import EventsList from '../features/events/eventsList';
 import api from '../api';
 import PageLoading from '../features/loaders/pageLoading';
 import PageError from './PageError';
-import MiniLoader from '../features/loaders/miniLoader';
+import Loader from 'react-loader-spinner';
 
 function Events() {
   const [data, setData] = useState(undefined);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -20,13 +22,26 @@ function Events() {
   }, []);
 
   const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+
     try {
       const data = await api.events.list();
       setData(data);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      setError({ error: error });
     }
   };
+
+  if (loading === true && !data) {
+    return <PageLoading />;
+  }
+
+  if (error) {
+    return <PageError error={error} />;
+  }
 
   return (
     <section className="section">
@@ -37,6 +52,17 @@ function Events() {
           </Link>
         </div>
         <EventsList events={data} />
+        <div className="is-flex is-justify-content-center">
+          {loading && (
+            <Loader
+              type="Grid"
+              color="#00BFFF"
+              height={50}
+              width={50}
+              timeout={3000}
+            />
+          )}
+        </div>
       </div>
     </section>
   );
