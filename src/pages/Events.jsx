@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import EventsList from '../features/events/eventsList';
 import api from '../api';
 import PageLoading from '../features/loaders/pageLoading';
+import PageError from './PageError';
+import MiniLoader from '../features/loaders/miniLoader';
 
 function Events() {
   const [data, setData] = useState(undefined);
