@@ -4,7 +4,7 @@ const EventItem = (props) => {
   const { image, title, organizer, date, location } = props;
 
   return (
-    <div className="is-flex is-align-items-center">
+    <div className="is-flex is-align-items-center is-justify-content-center is-align-content-center">
       <div>
         <figure className="image is-96x96">
           <img
