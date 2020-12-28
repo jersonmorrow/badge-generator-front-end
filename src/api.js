@@ -44,6 +44,16 @@ const api = {
       };
       return callApi('/events/new-event', config);
     },
+    update(eventId, updates) {
+      const config = {
+        headers: {
+          'x-auth-token': token,
+        },
+        method: 'PATCH',
+        data: updates,
+      };
+      return callApi(`/events/update/${eventId}`, config);
+    },
     remove(eventId) {
       const config = {
         headers: {
