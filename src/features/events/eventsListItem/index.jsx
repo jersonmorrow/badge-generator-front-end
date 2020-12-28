@@ -3,9 +3,11 @@ import defaultImage from '../../../images/default-image.png';
 import Moment from 'moment';
 import DeleteEventModal from '../../modals/deleteEventModal';
 import useDeleteEvents from '../../../hooks/useDeleteEvent';
+import { Link } from 'react-router-dom';
 
 function EventsListItem(props) {
   const { eventItem } = props;
+  const eventId = eventItem._id;
 
   const [image, setImage] = useState(defaultImage);
   const [date, setDate] = useState('');
@@ -63,9 +65,9 @@ function EventsListItem(props) {
             Create Event Badge
           </button>
         </p>
-        <p className="control">
-          <button className="button is-primary is-normal">Edit Event</button>
-        </p>
+        <Link className="button is primary" to={`/${eventId}/edit`}>
+          Edit
+        </Link>
         <p className="control">
           <button
             onClick={handleOpenModal}

@@ -1,7 +1,8 @@
 import React from 'react';
 
-function Event(props) {
+const EventItem = (props) => {
   const { image, title, organizer, date, location } = props;
+
   return (
     <div className="is-flex is-align-items-center">
       <div>
@@ -25,6 +26,6 @@ function Event(props) {
       </div>
     </div>
   );
-}
+};
 
-export default Event();
+export default EventItem;

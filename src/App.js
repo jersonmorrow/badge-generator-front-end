@@ -8,6 +8,7 @@ import Login from './features/auth/login';
 import SignUp from './features/auth/sign-up';
 import UserContext from './features/context/userContext';
 import Layout from './features/layout/Layout';
+import EventEdit from './pages/EventEdit';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -51,6 +52,7 @@ function App() {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/events" component={Events} />
             <Route path="/new-event" component={NewEvent} />
+            <Route path="/:eventId/edit" component={EventEdit} />
           </Switch>
         </Layout>
       </UserContext.Provider>
