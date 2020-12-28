@@ -10,7 +10,13 @@ function EventsListItem(props) {
   const [image, setImage] = useState(defaultImage);
   const [date, setDate] = useState('');
 
-  const { modal, setModal, handleDeleteEvent } = useDeleteEvents(eventItem);
+  const {
+    modal,
+    setModal,
+    handleDeleteEvent,
+    handleOpenModal,
+    handleCloseModal,
+  } = useDeleteEvents(eventItem);
 
   const getImage = () => {
     if (eventItem.eventImage) {
@@ -22,14 +28,6 @@ function EventsListItem(props) {
     const date = Date(eventItem.date);
     const formattedDate = Moment(date).format('LL');
     setDate(formattedDate);
-  };
-
-  const handleOpenModal = (e) => {
-    setModal(true);
-  };
-
-  const handleCloseModal = (e) => {
-    setModal(false);
   };
 
   useEffect(() => {
