@@ -1,35 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
-import EventForm from '../features/events/eventForm';
-import EventItem from '../features/events/eventItem';
+import EventEditItem from '../features/events/eventEditItem';
 import PageLoading from '../features/loaders/pageLoading';
 import defaultImage from '../images/default-image.png';
-import { useForm } from 'react-hook-form';
 
 function EventEdit(props) {
   const [data, setData] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const { register, handleSubmit, control, errors, formState } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-  });
+  const { eventId } = props.match.params;
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   const fetchData = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const data = await api.events.read(props.match.params.eventId);
+      const data = await api.events.read(eventId);
       setLoading(false);
       setData(data);
     } catch (error) {
@@ -39,36 +29,45 @@ function EventEdit(props) {
     }
   };
 
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+
+    const { title, organizer, location, date, img } = data;
+
+    const payload = new FormData();
+    payload.append('title', title);
+    payload.append('organizer', organizer);
+    payload.append('location', location);
+    payload.append('date', date);
+    payload.append('eventImage', img[0]);
+
+    try {
+      await api.events.update(eventId, payload);
+
+      // history.push('/events');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (loading) {
     return <PageLoading />;
   }
 
-  return (
-    <section className="section">
-      <div className="container is-flex is-justify-content-center">
-        <div>
-          <div className="box is-flex is-justify-content-flex-start	">
-            <EventItem
-              title={data.title || 'TITLE'}
-              image={data.eventImage || defaultImage}
-              organizer={data.organizer || 'ORGANIZER'}
-              date={data.date || 'DATE'}
-              location={data.location || 'LOCATION'}
-            />
-          </div>
-          <div className="mt-6">
-            <EventForm
-              onSubmit={handleSubmit(onSubmit)}
-              register={register}
-              errors={errors}
-              control={control}
-              formState={formState}
-            />
+  if (data) {
+    return (
+      <section className="section">
+        <div className="container">
+          <div>
+            <div className="box">
+              <EventEditItem data={data} onSubmit={onSubmit} />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  }
+  return true;
 }
 
 export default EventEdit;
