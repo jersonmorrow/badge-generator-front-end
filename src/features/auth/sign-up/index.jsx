@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import UserContext from '../../context/userContext';
+import UserContext from '../../../context/userContext';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
-import { checkUser } from '../../services/checkUser';
+import { checkUser } from '../../../services/checkUser';
 
 function SignUp() {
   const { register, handleSubmit, errors, formState, getValues } = useForm({

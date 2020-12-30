@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import UserContext from '../../context/userContext';
+import UserContext from '../../../context/userContext';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
-import { checkUserLogin } from '../../services/checkUser';
-import ErrorNotice from '../../misc/ErrorNotice';
-import logo from '../../../images/logo.png';
-import homeBackground from '../../../images/home-image.jpg';
+import { checkUserLogin } from '../../../services/checkUser';
+import ErrorNotice from '../../../misc/ErrorNotice';
+import logo from '../../../assets/logo.png';
+import homeBackground from '../../../assets/home-image.jpg';
 
 function Login() {
   const { register, handleSubmit, errors, formState } = useForm({

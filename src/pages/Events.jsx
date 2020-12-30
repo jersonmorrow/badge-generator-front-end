@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import EventsList from '../features/events/eventsList';
-import api from '../api';
+import api from '../api/api.js';
 import PageLoading from '../features/loaders/pageLoading';
 import PageError from './PageError';
 import Loader from 'react-loader-spinner';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../images/logo.png';
-import AuthOptions from '../../auth/authOptions';
+import logo from '../../assets/logo.png';
+import AuthOptions from '../../features/auth/authOptions';
 
 function NavBar() {
   return (

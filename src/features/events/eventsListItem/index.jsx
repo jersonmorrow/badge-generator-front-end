@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import defaultImage from '../../../images/default-image.png';
+import defaultImage from '../../../assets/default-image.png';
 import Moment from 'moment';
 import DeleteEventModal from '../../modals/deleteEventModal';
 import useDeleteEvents from '../../../hooks/useDeleteEvent';

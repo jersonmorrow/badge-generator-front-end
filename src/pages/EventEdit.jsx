@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../api';
+import api from '../api/api.js';
 import EventEditItem from '../features/events/eventEditItem';
 import PageLoading from '../features/loaders/pageLoading';
 import { useHistory } from 'react-router-dom';

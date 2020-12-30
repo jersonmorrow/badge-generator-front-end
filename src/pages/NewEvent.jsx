@@ -1,7 +1,7 @@
 import React from 'react';
 import EventForm from '../features/events/eventForm';
 import { useForm } from 'react-hook-form';
-import api from '../api';
+import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 
 function NewEvent() {

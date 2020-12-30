@@ -6,8 +6,8 @@ import NewEvent from './pages/NewEvent';
 import Events from './pages/Events';
 import Login from './features/auth/login';
 import SignUp from './features/auth/sign-up';
-import UserContext from './features/context/userContext';
-import Layout from './features/layout/Layout';
+import UserContext from './context/userContext';
+import Layout from './layout/Layout';
 import EventEdit from './pages/EventEdit';
 
 function App() {

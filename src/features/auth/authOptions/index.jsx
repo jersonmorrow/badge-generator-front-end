@@ -1,6 +1,6 @@
 import react, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserContext from '../../context/userContext';
+import UserContext from '../../../context/userContext';
 
 function AuthOptions() {
   const { userData, setUserData } = useContext(UserContext);
