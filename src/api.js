@@ -55,6 +55,7 @@ const api = {
     update(eventId, updates) {
       const config = {
         headers: {
+          'Content-Type': 'multipart/form-data',
           'x-auth-token': token,
         },
         method: 'PATCH',

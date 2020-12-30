@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import api from '../api';
 import EventEditItem from '../features/events/eventEditItem';
 import PageLoading from '../features/loaders/pageLoading';
-import defaultImage from '../images/default-image.png';
+import { useHistory } from 'react-router-dom';
 
 function EventEdit(props) {
   const [data, setData] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
+  const history = useHistory();
 
   useEffect(() => {
     fetchData();
@@ -44,7 +45,7 @@ function EventEdit(props) {
     try {
       await api.events.update(eventId, payload);
 
-      // history.push('/events');
+      history.push('/events');
     } catch (error) {
       console.log(error);
     }

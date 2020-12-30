@@ -26,7 +26,11 @@ const EventEditItem = (props) => {
 
   return (
     <div>
-      <form className="columns" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="columns"
+        onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
+      >
         <div className="column is-one-fifth is-flex is-flex-direction-column is-justify-content-center  is-align-items-center">
           <figure className="image is-96x96">
             <img
@@ -97,7 +101,7 @@ const EventEditItem = (props) => {
 
           <Controller
             control={control}
-            register={register({ required: true })}
+            register={register}
             rules={{ required: true }}
             name="date"
             render={({ onChange, onBlur, value }) => (
