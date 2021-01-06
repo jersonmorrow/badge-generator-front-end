@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import EventsList from '../features/events/eventsList';
+import BadgesList from '../features/badges/badgesList/index';
 import api from '../api/api.js';
 import PageLoading from '../features/loaders/pageLoading';
 import PageError from './PageError';
