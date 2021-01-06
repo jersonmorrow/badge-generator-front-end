@@ -6,8 +6,6 @@ const randomNumber = (min = 0, max = 1) =>
 const simulateNetworkLatency = (min = 30, max = 1500) =>
   delay(randomNumber(min, max));
 
-let token = localStorage.getItem('auth-token');
-
 const instance = Axios.create({
   baseURL: 'http://localhost:5000',
 });
@@ -23,16 +21,16 @@ async function callApi(endpoint, options) {
 
 const api = {
   events: {
-    list() {
+    async list() {
       const config = {
-        headers: {
-          'x-auth-token': token,
-        },
         method: 'GET',
+        headers: {
+          'x-auth-token': await localStorage.getItem('auth-token'),
+        },
       };
       return callApi('/events/', config);
     },
-    create(event) {
+    create(event, token) {
       const data = event;
       const config = {
         headers: {
@@ -44,7 +42,7 @@ const api = {
       };
       return callApi('/events/new-event', config);
     },
-    read(eventId) {
+    read(eventId, token) {
       const config = {
         headers: {
           'x-auth-token': token,
@@ -52,7 +50,7 @@ const api = {
       };
       return callApi(`/events/${eventId}`, config);
     },
-    update(eventId, updates) {
+    update(eventId, updates, token) {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -63,7 +61,7 @@ const api = {
       };
       return callApi(`/events/update/${eventId}`, config);
     },
-    remove(eventId) {
+    remove(eventId, token) {
       const config = {
         headers: {
           'x-auth-token': token,

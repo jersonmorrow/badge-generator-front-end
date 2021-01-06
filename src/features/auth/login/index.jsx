@@ -33,7 +33,7 @@ function Login() {
         user: loginResponse.data.user,
       });
       localStorage.setItem('auth-token', loginResponse.data.token);
-      history.push('/');
+      history.push('/events');
     } catch (error) {
       error.response.data.msg && setError(error.response.data.msg);
     }

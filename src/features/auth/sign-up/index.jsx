@@ -29,7 +29,7 @@ function SignUp() {
       user: loginResponse.data.user,
     });
     localStorage.setItem('auth-token', loginResponse.data.token);
-    history.push('/');
+    history.push('/events');
   };
 
   return (

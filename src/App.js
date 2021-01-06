@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import Landing from './pages/Landing';
 import NewEvent from './pages/NewEvent';
 import Events from './pages/Events';
 import Login from './features/auth/login';
 import SignUp from './features/auth/sign-up';
 import UserContext from './context/userContext';
-import Layout from './layout/Layout';
 import EventEdit from './pages/EventEdit';
+import ProtectedRoute from './routers/protectedRoute';
+import { checkLoggedIn } from './services/checkLoggedIn';
+import PublicRoute from './routers/publicRoute';
+import Layout from './layout/Layout';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -17,44 +19,37 @@ function App() {
   });
 
   useEffect(() => {
-    const checkLoggedIn = async () => {
-      let token = localStorage.getItem('auth-token');
-      if (token === null) {
-        localStorage.setItem('auth-token', '');
-        token = '';
-      }
-      const tokenResponse = await Axios.post(
-        'http://localhost:5000/users/tokenIsValid',
-        null,
-        { headers: { 'x-auth-token': token } }
-      );
-      if (tokenResponse.data) {
-        const userResponse = await Axios.get('http://localhost:5000/users/', {
-          headers: { 'x-auth-token': token },
-        });
-        setUserData({
-          token,
-          user: userResponse.data,
-        });
-      }
-    };
-
-    checkLoggedIn();
+    checkLoggedIn(setUserData);
   }, []);
 
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ userData, setUserData }}>
-        <Layout>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-            <Route path="/events" component={Events} />
-            <Route path="/new-event" component={NewEvent} />
-            <Route path="/:eventId/edit" component={EventEdit} />
-          </Switch>
-        </Layout>
+        <Switch>
+          <PublicRoute exact path="/" component={Landing} />
+          <PublicRoute exact path="/login" component={Login} />
+          <PublicRoute exact path="/sign-up" component={SignUp} />
+
+          <Layout>
+            <ProtectedRoute
+              exact
+              path="/events"
+              user={userData.user}
+              component={Events}
+            />
+
+            <ProtectedRoute
+              path="/new-event"
+              user={userData.user}
+              component={NewEvent}
+            />
+            <ProtectedRoute
+              path="/:eventId/edit"
+              user={userData.user}
+              component={EventEdit}
+            />
+          </Layout>
+        </Switch>
       </UserContext.Provider>
     </BrowserRouter>
   );

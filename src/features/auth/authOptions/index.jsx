@@ -1,4 +1,4 @@
-import react, { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../../context/userContext';
 
@@ -14,7 +14,8 @@ function AuthOptions() {
       token: undefined,
       user: undefined,
     });
-    localStorage.setItem('auth-token', '');
+    localStorage.clear();
+    history.push('./login');
   };
 
   return (
