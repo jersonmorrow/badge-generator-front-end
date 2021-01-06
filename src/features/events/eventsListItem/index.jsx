@@ -61,9 +61,7 @@ function EventsListItem(props) {
 
       <div className="field is-grouped">
         <p className="control">
-          <button className="button is-success is-normal">
-            Create Event Badge
-          </button>
+          <button className="button is-success is-normal">Badges</button>
         </p>
         <Link className="button is primary" to={`/${eventId}/edit`}>
           Edit

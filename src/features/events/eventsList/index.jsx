@@ -41,9 +41,7 @@ function EventsList(props) {
         {filteredEvents.map((eventItem) => {
           return (
             <li className="box" key={eventItem._id}>
-              <Link to={`/events/${eventItem._id}`}>
-                <EventsListItem eventItem={eventItem} />
-              </Link>
+              <EventsListItem eventItem={eventItem} />
             </li>
           );
         })}
