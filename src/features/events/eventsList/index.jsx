@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useSearchEvents from '../../../hooks/useSearchEvents';
+import useSearchItem from '../../../hooks/useSearchItems';
 import EventsListItem from '../eventsListItem';
 import SearchEvents from '../searchEvents';
 
 function EventsList(props) {
   const { events } = props;
-  const { query, setQuery, filteredEvents } = useSearchEvents(events);
+  const { query, setQuery, filteredItems } = useSearchItem(events);
 
-  if (!filteredEvents) {
+  if (!filteredItems) {
     return (
       <div>
         <div className="columns">
@@ -38,7 +38,7 @@ function EventsList(props) {
         </strong>
       </div>
       <ul className="mb-4 content">
-        {filteredEvents.map((eventItem) => {
+        {filteredItems.map((eventItem) => {
           return (
             <li className="box" key={eventItem._id}>
               <EventsListItem eventItem={eventItem} />
