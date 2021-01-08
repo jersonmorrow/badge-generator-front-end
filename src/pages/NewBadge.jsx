@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import BadgeForm from '../features/events/badgeForm';
+import BadgeForm from '../features/badges/badgeForm';
+import Badge from '../features/badges/badge';
 import { useForm } from 'react-hook-form';
 import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
@@ -65,7 +66,6 @@ function NewBadge() {
               onSubmit={handleSubmit(onSubmit)}
               register={register}
               errors={errors}
-              formState={formState}
             />
           </div>
         </div>
