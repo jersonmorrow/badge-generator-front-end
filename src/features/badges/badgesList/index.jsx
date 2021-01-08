@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useSearchItem from '../../../hooks/useSearchItems';
-// import BadgesListItem from '../badgesListItem';
+import BadgesListItem from '../badgesListItem';
 import SearchBadges from '../searchBadges';
 
 function BadgesList(props) {
@@ -41,7 +41,7 @@ function BadgesList(props) {
         {filteredItems.map((badgetItem) => {
           return (
             <li className="box" key={badgetItem._id}>
-              <BadgeListItem badgeItem={badgetItem} />
+              <BadgesListItem badgeItem={badgetItem} />
             </li>
           );
         })}

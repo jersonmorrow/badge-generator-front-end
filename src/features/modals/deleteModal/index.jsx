@@ -1,8 +1,8 @@
 import React from 'react';
 import Modal from '../modal';
 
-function DeleteEventModal(props) {
-  const { isOpen, onClose, onDeleteEvent } = props;
+function DeleteModal(props) {
+  const { isOpen, onClose, onDelete } = props;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -18,7 +18,7 @@ function DeleteEventModal(props) {
             </button>
           </p>
           <p className="control">
-            <button onClick={onDeleteEvent} className="button is-danger">
+            <button onClick={onDelete} className="button is-danger">
               Delete
             </button>
           </p>
@@ -28,4 +28,4 @@ function DeleteEventModal(props) {
   );
 }
 
-export default DeleteEventModal;
+export default DeleteModal;

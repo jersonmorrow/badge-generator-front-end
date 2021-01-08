@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import api from '../../api/api.js';
 
-function useDeleteEvents(props) {
+function useDeleteItems(props) {
   const [modal, setModal] = useState(false);
 
   const handleOpenModal = (e) => {
@@ -21,13 +21,23 @@ function useDeleteEvents(props) {
     }
   };
 
+  const handleDeleteBadge = async (e) => {
+    try {
+      await api.badges.remove(props._id);
+      props.history.push('/badges');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     modal,
     setModal,
     handleDeleteEvent,
+    handleDeleteBadge,
     handleOpenModal,
     handleCloseModal,
   };
 }
 
-export default useDeleteEvents;
+export default useDeleteItems;

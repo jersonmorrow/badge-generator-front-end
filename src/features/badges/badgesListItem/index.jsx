@@ -1,39 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import defaultImage from '../../../assets/default-image.png';
-import Moment from 'moment';
 import DeleteModal from '../../modals/deleteModal';
 import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
 
-function EventsListItem(props) {
-  const { eventItem } = props;
-  const eventId = eventItem._id;
+function BadgesListItem(props) {
+  const { badgeItem } = props;
+  const badgeId = badgeItem._id;
 
   const [image, setImage] = useState(defaultImage);
-  const [date, setDate] = useState('');
 
   const {
     modal,
-    handleDeleteEvent,
+    handleDeleteBadge,
     handleOpenModal,
     handleCloseModal,
-  } = useDeleteItems(eventItem);
+  } = useDeleteItems(badgeItem);
 
   const getImage = () => {
-    if (eventItem.eventImage) {
-      setImage(eventItem.eventImage);
+    if (badgeItem.badgeImage) {
+      setImage(badgeItem.badgeImage);
     }
-  };
-
-  const formatDate = () => {
-    const date = Date(eventItem.date);
-    const formattedDate = Moment(date).format('LL');
-    setDate(formattedDate);
   };
 
   useEffect(() => {
     getImage();
-    formatDate();
   });
 
   return (
@@ -51,18 +42,17 @@ function EventsListItem(props) {
 
       <div className="mx-4">
         <strong>
-          <p className="title is-5">{eventItem.title}</p>
+          <p className="title is-5">{badgeItem.name}</p>
         </strong>
-        <p className="subtitle is-6 m-0">{eventItem.organizer}</p>
-        <p className="subtitle is-6 m-0">{date}</p>
-        <p className="subtitle is-6 m-0">{eventItem.location}</p>
+        <p className="subtitle is-6 m-0">{badgeItem.email}</p>
+        <p className="subtitle is-6 m-0">{badgeItem.jobTitle}</p>
+        <div>
+          <p className="subtitle is-6 m-0">{badgeItem.categorie}</p>
+        </div>
       </div>
 
       <div className="field is-grouped">
-        <p className="control">
-          <button className="button is-success is-normal">Badges</button>
-        </p>
-        <Link className="button is primary" to={`/${eventId}/edit`}>
+        <Link className="button is primary" to={`/${badgeId}/edit`}>
           Edit
         </Link>
         <p className="control">
@@ -70,12 +60,12 @@ function EventsListItem(props) {
             onClick={handleOpenModal}
             className="button is-danger is-normal"
           >
-            Delete Event
+            Delete
           </button>
           <DeleteModal
             isOpen={modal}
             onClose={handleCloseModal}
-            onDelete={handleDeleteEvent}
+            onDelete={handleDeleteBadge}
           />
         </p>
       </div>
@@ -83,4 +73,4 @@ function EventsListItem(props) {
   );
 }
 
-export default EventsListItem;
+export default BadgesListItem;
