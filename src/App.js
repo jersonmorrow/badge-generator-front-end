@@ -12,6 +12,7 @@ import { checkLoggedIn } from './services/checkLoggedIn';
 import PublicRoute from './routers/publicRoute';
 import Layout from './layout/Layout';
 import NewBadge from './pages/NewBadge';
+import Badges from './pages/Badges';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -48,6 +49,12 @@ function App() {
               path="/:eventId/edit"
               user={userData.user}
               component={EventEdit}
+            />
+
+            <ProtectedRoute
+              path="/:eventId/badges"
+              user={userData.user}
+              component={Badges}
             />
 
             <ProtectedRoute

@@ -6,10 +6,11 @@ import PageLoading from '../features/loaders/pageLoading';
 import PageError from './PageError';
 import Loader from 'react-loader-spinner';
 
-function Badges() {
+function Badges(props) {
   const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { eventId } = props.match.params;
 
   useEffect(() => {
     fetchData();
@@ -26,7 +27,7 @@ function Badges() {
     setError(null);
 
     try {
-      const data = await api.badges.list();
+      const data = await api.badges.list(eventId);
       setData(data);
       setLoading(false);
     } catch (error) {
@@ -47,7 +48,7 @@ function Badges() {
     <section className="section">
       <div className="container mx-6">
         <div className="is-flex is-justify-content-flex-end	">
-          <Link className="button is-success" to="/new-badge">
+          <Link className="button is-success" to={`/${eventId}/new-badge`}>
             New Badge
           </Link>
         </div>

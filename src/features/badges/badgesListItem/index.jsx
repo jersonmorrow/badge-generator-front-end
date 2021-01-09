@@ -17,15 +17,15 @@ function BadgesListItem(props) {
     handleCloseModal,
   } = useDeleteItems(badgeItem);
 
-  const getImage = () => {
-    if (badgeItem.badgeImage) {
-      setImage(badgeItem.badgeImage);
-    }
-  };
+  // const getImage = () => {
+  //   if (badgeItem.badgeImage) {
+  //     setImage(badgeItem.badgeImage);
+  //   }
+  // };
 
-  useEffect(() => {
-    getImage();
-  });
+  // useEffect(() => {
+  //   getImage();
+  // });
 
   return (
     <div className="is-flex is-align-items-center">
@@ -42,7 +42,7 @@ function BadgesListItem(props) {
 
       <div className="mx-4">
         <strong>
-          <p className="title is-5">{badgeItem.name}</p>
+          <p className="title is-5">{`${badgeItem.firstName} ${badgeItem.lastName}`}</p>
         </strong>
         <p className="subtitle is-6 m-0">{badgeItem.email}</p>
         <p className="subtitle is-6 m-0">{badgeItem.jobTitle}</p>

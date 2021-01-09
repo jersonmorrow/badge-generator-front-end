@@ -34,7 +34,7 @@ function BadgesList(props) {
       </div>
       <div className="mb-4">
         <strong>
-          <p className="title is-5 ">Events</p>
+          <p className="title is-5 ">Badges</p>
         </strong>
       </div>
       <ul className="mb-4 content">
