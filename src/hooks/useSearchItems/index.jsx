@@ -7,7 +7,7 @@ function useSearchItem(items) {
   useMemo(async () => {
     try {
       const result = await items.filter((anyItem) => {
-        return `${anyItem.title} ${anyItem.organizer}`
+        return `${anyItem.title} ${anyItem.organizer} ${anyItem.firstName} ${anyItem.lastName} ${anyItem.email}`
           .toLowerCase()
           .includes(query.toLowerCase());
       });
