@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import defaultImage from '../../../assets/default-image.png';
+import React from 'react';
 import DeleteModal from '../../modals/deleteModal';
 import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
 
 function BadgesListItem(props) {
-  const { badgeItem } = props;
+  const { badgeItem, eventLogo } = props;
   const badgeId = badgeItem._id;
-
-  const [image, setImage] = useState(defaultImage);
 
   const {
     modal,
@@ -17,16 +14,6 @@ function BadgesListItem(props) {
     handleCloseModal,
   } = useDeleteItems(badgeItem);
 
-  // const getImage = () => {
-  //   if (badgeItem.badgeImage) {
-  //     setImage(badgeItem.badgeImage);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getImage();
-  // });
-
   return (
     <div className="is-flex is-align-items-center">
       <div>
@@ -34,7 +21,7 @@ function BadgesListItem(props) {
           <img
             width="96px"
             className="is-rounded is-vcentered"
-            src={image}
+            src={eventLogo}
             alt="event-image"
           />
         </figure>

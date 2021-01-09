@@ -5,7 +5,7 @@ import BadgesListItem from '../badgesListItem';
 import SearchBadges from '../searchBadges';
 
 function BadgesList(props) {
-  const { badges } = props;
+  const { badges, eventLogo } = props;
   const { query, setQuery, filteredItems } = useSearchItem(badges);
 
   if (!filteredItems) {
@@ -41,7 +41,7 @@ function BadgesList(props) {
         {filteredItems.map((badgetItem) => {
           return (
             <li className="box" key={badgetItem._id}>
-              <BadgesListItem badgeItem={badgetItem} />
+              <BadgesListItem eventLogo={eventLogo} badgeItem={badgetItem} />
             </li>
           );
         })}

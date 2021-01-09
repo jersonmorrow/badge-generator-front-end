@@ -5,15 +5,19 @@ import api from '../api/api.js';
 import PageLoading from '../features/loaders/pageLoading';
 import PageError from './PageError';
 import Loader from 'react-loader-spinner';
+import { fetchLogo } from '../services/fetchLogo';
+import defaultImage from '../assets/default-image.png';
 
 function Badges(props) {
   const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
+  const [eventLogo, setEventLogo] = useState(defaultImage);
 
   useEffect(() => {
     fetchData();
+    fetchLogo(setEventLogo, props);
 
     let intervalId = setInterval(fetchData, 5000);
 
@@ -52,7 +56,7 @@ function Badges(props) {
             New Badge
           </Link>
         </div>
-        <BadgesList badges={data} />
+        <BadgesList eventLogo={eventLogo} badges={data} />
         <div className="is-flex is-justify-content-center">
           {loading && (
             <Loader

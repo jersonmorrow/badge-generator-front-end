@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function BadgeForm(props) {
-  const { onSubmit, register, errors, formState } = props;
+  const { onSubmit, register, errors, formState, eventId } = props;
 
   return (
     <form onSubmit={onSubmit}>
@@ -103,7 +103,7 @@ function BadgeForm(props) {
       </div>
 
       <div className="field is-grouped">
-        <Link to="/badges" className="control">
+        <Link to={`/${eventId}/badges`} className="control">
           <button className="button is-danger is-normal">Cancel</button>
         </Link>
 

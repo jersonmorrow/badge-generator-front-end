@@ -5,32 +5,23 @@ import { useForm } from 'react-hook-form';
 import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
+import defaultImage from '../assets/default-image.png';
 
 function NewBadge(props) {
-  const { register, handleSubmit, errors, watch, formState } = useForm();
+  const { register, handleSubmit, errors, watch, formState } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+  });
   const { eventId } = props.match.params;
-
   const [badgeImage, setBadgeImage] = useState(
     'https://i.pinimg.com/originals/56/d8/44/56d844bff35317eda6a42544f71ecd4c.jpg'
   );
 
-  const [eventLogo, setEventLogo] = useState(
-    'https://icon-library.com/images/logo-icon-png/logo-icon-png-25.jpg'
-  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
   const watchAllFields = watch();
-
-  useEffect(() => {
-    const fetchLogo = async () => {
-      const response = await api.events.read(props.match.params.eventId);
-      const eventLogo = response.eventImage;
-      setEventLogo(eventLogo);
-    };
-
-    fetchLogo();
-  }, []);
+  const eventLogo = localStorage.getItem('event-logo');
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
@@ -66,7 +57,7 @@ function NewBadge(props) {
               jobTitle={watchAllFields.jobTitle || 'JOBTITLE'}
               categorie={watchAllFields.categorie || 'CATEGORIE'}
               badgeImage={watchAllFields.badgeImage || badgeImage}
-              eventLogo={eventLogo}
+              eventLogo={eventLogo || defaultImage}
             />
           </div>
           <div className="column is-two-fifths">
@@ -76,6 +67,7 @@ function NewBadge(props) {
               register={register}
               errors={errors}
               formState={formState}
+              eventId={eventId}
             />
           </div>
           <div className="column"></div>
