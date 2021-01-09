@@ -11,6 +11,7 @@ import ProtectedRoute from './routers/protectedRoute';
 import { checkLoggedIn } from './services/checkLoggedIn';
 import PublicRoute from './routers/publicRoute';
 import Layout from './layout/Layout';
+import NewBadge from './pages/NewBadge';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -47,6 +48,12 @@ function App() {
               path="/:eventId/edit"
               user={userData.user}
               component={EventEdit}
+            />
+
+            <ProtectedRoute
+              path="/new-badge"
+              user={userData.user}
+              component={NewBadge}
             />
           </Layout>
         </Switch>

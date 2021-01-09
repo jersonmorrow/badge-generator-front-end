@@ -7,70 +7,85 @@ import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
 
 function NewBadge() {
-  const { register, handleSubmit, control, errors, formState } = useForm({
+  const { register, handleSubmit, errors, watch } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  const history = useHistory();
+  const [badgeImage, setBadgeImage] = useState(
+    'https://i.pinimg.com/originals/56/d8/44/56d844bff35317eda6a42544f71ecd4c.jpg'
+  );
+
+  const [eventLogo, setEventLogo] = useState(
+    'https://icon-library.com/images/logo-icon-png/logo-icon-png-25.jpg'
+  );
+  //   const [loading, setLoading] = useState(false);
+  //   const [error, setError] = useState(null);
+
+  //   const history = useHistory();
+
+  const watchAllFields = watch();
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
+    console.log(data);
+    // setLoading(true);
+    // setError(null);
 
-    const { name, lastName, email, jobTitle, categorie, badgeImage } = data;
+    // const { name, lastName, email, jobTitle, categorie, badgeImage } = data;
 
-    const payload = new FormData();
-    payload.append('name', name);
-    payload.append('lastName', lastName);
-    payload.append('email', email);
-    payload.append('jobTitle', jobTitle);
-    payload.append('categorie', categorie);
-    payload.append('badgeImage', badgeImage);
+    // const payload = new FormData();
+    // payload.append('name', name);
+    // payload.append('lastName', lastName);
+    // payload.append('email', email);
+    // payload.append('jobTitle', jobTitle);
+    // payload.append('categorie', categorie);
+    // payload.append('badgeImage', badgeImage);
 
-    try {
-      await api.badges.create(payload);
-      setLoading(false);
+    // try {
+    //   await api.badges.create(payload);
+    //   setLoading(false);
 
-      history.push('/badges');
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-      setError(error);
-    }
+    //   history.push('/badges');
+    // } catch (error) {
+    //   console.log(error);
+    //   setLoading(false);
+    //   setError(error);
+    // }
   };
 
-  if (loading) {
-    return <PageLoading />;
-  }
+  //   if (loading) {
+  //     return <PageLoading />;
+  //   }
 
   return (
-    <React.Fragment>
-      <div className="container is-flex is-justify-content-center mx-6">
-        <div classNam="column">
-          <div className="my-6">
+    <div className="section">
+      <div className="container">
+        <div className="columns">
+          <div className="column"></div>
+          <div className="column is-one-third">
             <Badge
-              name={'FIRST NAME'}
-              lastName={'LAST NAME'}
-              email={'EMAIL'}
-              jobTitle={'JOBTITLE'}
-              categorie={'CATEGORIE'}
+              name={watchAllFields.name || 'FIRST NAME'}
+              lastName={watchAllFields.lastName || 'LAST NAME'}
+              email={watchAllFields.email || 'EMAIL'}
+              jobTitle={watchAllFields.jobTitle || 'JOBTITLE'}
+              categorie={watchAllFields.categorie || 'CATEGORIE'}
+              badgeImage={watchAllFields.badgeImage || badgeImage}
+              eventLogo={eventLogo}
             />
           </div>
-          <div>
-            <h1>New Badge</h1>
+          <div className="column is-two-fifths">
+            <h3 className="title is-3">New Badge</h3>
             <BadgeForm
               onSubmit={handleSubmit(onSubmit)}
               register={register}
               errors={errors}
             />
           </div>
+          <div className="column"></div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 
