@@ -6,11 +6,13 @@ import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
 
-function NewBadge() {
+function NewBadge(props) {
   const { register, handleSubmit, errors, watch, formState } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
+
+  const { eventId } = props.match.params;
 
   const [badgeImage, setBadgeImage] = useState(
     'https://i.pinimg.com/originals/56/d8/44/56d844bff35317eda6a42544f71ecd4c.jpg'
@@ -33,7 +35,7 @@ function NewBadge() {
     // setError(null);
 
     try {
-      await api.badges.create(data);
+      await api.badges.create(data, eventId);
       //   setLoading(false);
 
       //   history.push('/badges');

@@ -51,7 +51,7 @@ function App() {
             />
 
             <ProtectedRoute
-              path="/new-badge"
+              path="/:eventId/new-badge"
               user={userData.user}
               component={NewBadge}
             />
