@@ -42,10 +42,10 @@ const api = {
       };
       return callApi('/events/new-event', config);
     },
-    read(eventId, token) {
+    async read(eventId) {
       const config = {
         headers: {
-          'x-auth-token': token,
+          'x-auth-token': await localStorage.getItem('auth-token'),
         },
       };
       return callApi(`/events/${eventId}`, config);

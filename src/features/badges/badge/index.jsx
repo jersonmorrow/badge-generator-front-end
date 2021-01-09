@@ -24,8 +24,8 @@ function Badge(props) {
       style={badgeBackground}
     >
       <div>
-        <figure>
-          <img src={eventLogo} width="80px" />
+        <figure className="image is-96x96">
+          <img className="is-rounded" src={eventLogo} />
         </figure>
       </div>
       <div>

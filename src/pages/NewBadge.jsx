@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BadgeForm from '../features/badges/badgeForm';
 import Badge from '../features/badges/badge';
 import { useForm } from 'react-hook-form';
@@ -7,11 +7,7 @@ import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
 
 function NewBadge(props) {
-  const { register, handleSubmit, errors, watch, formState } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-  });
-
+  const { register, handleSubmit, errors, watch, formState } = useForm();
   const { eventId } = props.match.params;
 
   const [badgeImage, setBadgeImage] = useState(
@@ -23,10 +19,18 @@ function NewBadge(props) {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const history = useHistory();
-
   const watchAllFields = watch();
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      const response = await api.events.read(props.match.params.eventId);
+      const eventLogo = response.eventImage;
+      setEventLogo(eventLogo);
+    };
+
+    fetchLogo();
+  }, []);
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
