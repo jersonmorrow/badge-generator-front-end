@@ -72,6 +72,15 @@ const api = {
     },
   },
   badges: {
+    async list(eventId) {
+      const config = {
+        method: 'GET',
+        headers: {
+          'x-auth-token': await localStorage.getItem('auth-token'),
+        },
+      };
+      return callApi(`/badges/${eventId}`, config);
+    },
     async create(badge, eventId) {
       const data = badge;
       const config = {
