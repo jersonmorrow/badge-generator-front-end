@@ -71,6 +71,19 @@ const api = {
       return callApi(`/events/delete/${eventId}`, config);
     },
   },
+  badges: {
+    async create(badge, eventId) {
+      const data = badge;
+      const config = {
+        headers: {
+          'x-auth-token': await localStorage.getItem('auth-token'),
+        },
+        method: 'POST',
+        data: data,
+      };
+      return callApi(`/badges/new-badge/${eventId}`, config);
+    },
+  },
 };
 
 export default api;

@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
 
 function NewBadge() {
-  const { register, handleSubmit, errors, watch } = useForm({
+  const { register, handleSubmit, errors, watch, formState } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
@@ -32,26 +32,16 @@ function NewBadge() {
     // setLoading(true);
     // setError(null);
 
-    // const { name, lastName, email, jobTitle, categorie, badgeImage } = data;
+    try {
+      await api.badges.create(data);
+      //   setLoading(false);
 
-    // const payload = new FormData();
-    // payload.append('name', name);
-    // payload.append('lastName', lastName);
-    // payload.append('email', email);
-    // payload.append('jobTitle', jobTitle);
-    // payload.append('categorie', categorie);
-    // payload.append('badgeImage', badgeImage);
-
-    // try {
-    //   await api.badges.create(payload);
-    //   setLoading(false);
-
-    //   history.push('/badges');
-    // } catch (error) {
-    //   console.log(error);
-    //   setLoading(false);
-    //   setError(error);
-    // }
+      //   history.push('/badges');
+    } catch (error) {
+      console.log(error);
+      //   setLoading(false);
+      //   setError(error);
+    }
   };
 
   //   if (loading) {
@@ -65,7 +55,7 @@ function NewBadge() {
           <div className="column"></div>
           <div className="column is-one-third">
             <Badge
-              name={watchAllFields.name || 'FIRST NAME'}
+              firstName={watchAllFields.firstName || 'FIRST NAME'}
               lastName={watchAllFields.lastName || 'LAST NAME'}
               email={watchAllFields.email || 'EMAIL'}
               jobTitle={watchAllFields.jobTitle || 'JOBTITLE'}
@@ -80,6 +70,7 @@ function NewBadge() {
               onSubmit={handleSubmit(onSubmit)}
               register={register}
               errors={errors}
+              formState={formState}
             />
           </div>
           <div className="column"></div>

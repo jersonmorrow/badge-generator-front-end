@@ -3,7 +3,7 @@ import './index.css';
 
 function Badge(props) {
   const {
-    name,
+    firstName,
     lastName,
     email,
     jobTitle,
@@ -29,7 +29,7 @@ function Badge(props) {
         </figure>
       </div>
       <div>
-        <p className="title m-0 is-2">{name}</p>
+        <p className="title m-0 is-2">{firstName}</p>
         <p className="title m-0 is-2">{lastName}</p>
       </div>
 
