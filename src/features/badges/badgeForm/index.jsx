@@ -79,15 +79,19 @@ function BadgeForm(props) {
           <input
             className="input"
             type="text"
-            placeholder="URL Badge Background"
+            placeholder="URL Badge Background Image"
             name="badgeImage"
             ref={register}
           />
+          <span className="tag is-light mt-3">
+            ⚠️ Background image must be at least 500x300 px!
+          </span>
         </div>
       </div>
 
       <div className="field">
-        <label>Categorie</label>
+        <label>Categorie:</label>
+        <br />
         <div className="select">
           <select
             name="categorie"
