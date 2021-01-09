@@ -21,34 +21,33 @@ function NewBadge(props) {
   const [eventLogo, setEventLogo] = useState(
     'https://icon-library.com/images/logo-icon-png/logo-icon-png-25.jpg'
   );
-  //   const [loading, setLoading] = useState(false);
-  //   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  //   const history = useHistory();
+  const history = useHistory();
 
   const watchAllFields = watch();
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    console.log(data);
-    // setLoading(true);
-    // setError(null);
+    setLoading(true);
+    setError(null);
 
     try {
       await api.badges.create(data, eventId);
-      //   setLoading(false);
+      setLoading(false);
 
-      //   history.push('/badges');
+      history.push(`/${eventId}/badges`);
     } catch (error) {
       console.log(error);
-      //   setLoading(false);
-      //   setError(error);
+      setLoading(false);
+      setError(error);
     }
   };
 
-  //   if (loading) {
-  //     return <PageLoading />;
-  //   }
+  if (loading) {
+    return <PageLoading />;
+  }
 
   return (
     <div className="section">
