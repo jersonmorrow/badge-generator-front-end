@@ -92,6 +92,16 @@ const api = {
       };
       return callApi(`/badges/new-badge/${eventId}`, config);
     },
+    async update(updates, badgeId) {
+      const config = {
+        headers: {
+          'x-auth-token': await localStorage.getItem('auth-token'),
+        },
+        method: 'PATCH',
+        data: updates,
+      };
+      return callApi(`/badges/update/${badgeId}`, config);
+    },
   },
 };
 

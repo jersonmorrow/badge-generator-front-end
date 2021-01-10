@@ -13,6 +13,7 @@ function Badges(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
+  localStorage.setItem('event-id', eventId);
   const [eventLogo, setEventLogo] = useState(defaultImage);
 
   useEffect(() => {
