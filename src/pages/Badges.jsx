@@ -7,12 +7,14 @@ import PageError from './PageError';
 import Loader from 'react-loader-spinner';
 import { fetchLogo } from '../services/fetchLogo';
 import defaultImage from '../assets/default-image.png';
+import BadgeInfoFooter from '../features/badges/badgeInfoFooter';
 
 function Badges(props) {
   const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
+  const { eventData } = props.location.aboutProps;
   localStorage.setItem('event-id', eventId);
   const [eventLogo, setEventLogo] = useState(defaultImage);
 
@@ -61,15 +63,16 @@ function Badges(props) {
         <div className="is-flex is-justify-content-center">
           {loading && (
             <Loader
-              type="Grid"
+              type="ThreeDots"
               color="#00BFFF"
-              height={50}
-              width={50}
+              height={30}
+              width={30}
               timeout={3000}
             />
           )}
         </div>
       </div>
+      <BadgeInfoFooter eventData={eventData} />
     </section>
   );
 }

@@ -59,7 +59,15 @@ function EventsListItem(props) {
       </div>
 
       <div className="field is-grouped">
-        <Link className="button is-success is-normal" to={`/${eventId}/badges`}>
+        <Link
+          className="button is-success"
+          to={{
+            pathname: `/${eventId}/badges`,
+            aboutProps: {
+              eventData: eventItem,
+            },
+          }}
+        >
           Badges
         </Link>
         <Link className="button is primary" to={`/${eventId}/edit`}>
