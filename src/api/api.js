@@ -102,6 +102,15 @@ const api = {
       };
       return callApi(`/badges/update/${badgeId}`, config);
     },
+    async remove(badgeId) {
+      const config = {
+        headers: {
+          'x-auth-token': await localStorage.getItem('auth-token'),
+        },
+        method: 'DELETE',
+      };
+      return callApi(`/badges/delete/${badgeId}`, config);
+    },
   },
 };
 
