@@ -14,7 +14,7 @@ function Badges(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
-  const { eventData } = props.location.aboutProps;
+  // const { eventData } = props.location.aboutProps;
   localStorage.setItem('event-id', eventId);
   const [eventLogo, setEventLogo] = useState(defaultImage);
 
@@ -72,7 +72,7 @@ function Badges(props) {
           )}
         </div>
       </div>
-      <BadgeInfoFooter eventData={eventData} />
+      {/* <BadgeInfoFooter eventData={eventData} /> */}
     </section>
   );
 }

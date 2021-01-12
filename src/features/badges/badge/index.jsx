@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './index.css';
 
-function Badge(props) {
+const Badge = forwardRef((props, componentRef) => {
   const {
     firstName,
     lastName,
@@ -20,6 +20,7 @@ function Badge(props) {
 
   return (
     <div
+      ref={componentRef}
       className="badge is-flex px-5	is-flex-direction-column is-justify-content-space-evenly is-align-items-flex-start"
       style={badgeBackground}
     >
@@ -42,6 +43,6 @@ function Badge(props) {
       </div>
     </div>
   );
-}
+});
 
 export default Badge;

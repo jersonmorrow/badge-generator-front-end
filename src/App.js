@@ -14,6 +14,7 @@ import Layout from './layout/Layout';
 import NewBadge from './pages/NewBadge';
 import Badges from './pages/Badges';
 import BadgeEdit from './pages/BadgeEdit';
+import BadgeDetails from './pages/BadgeDetails';
 
 function App() {
   const [userData, setUserData] = useState({
@@ -68,6 +69,12 @@ function App() {
               path="/:badgeId/edit-badge"
               user={userData.user}
               component={BadgeEdit}
+            />
+
+            <ProtectedRoute
+              path="/badges/:badgeId"
+              user={userData.user}
+              component={BadgeDetails}
             />
           </Layout>
         </Switch>

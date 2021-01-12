@@ -38,10 +38,19 @@ function BadgesList(props) {
         </strong>
       </div>
       <ul className="mb-4 content">
-        {filteredItems.map((badgetItem) => {
+        {filteredItems.map((badgeItem) => {
           return (
-            <li className="box" key={badgetItem._id}>
-              <BadgesListItem eventLogo={eventLogo} badgeItem={badgetItem} />
+            <li className="box" key={badgeItem._id}>
+              <Link
+                to={{
+                  pathname: `/badges/${badgeItem._id}`,
+                  aboutProps: {
+                    badgeData: badgeItem,
+                  },
+                }}
+              >
+                <BadgesListItem eventLogo={eventLogo} badgeItem={badgeItem} />
+              </Link>
             </li>
           );
         })}
