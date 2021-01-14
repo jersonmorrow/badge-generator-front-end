@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../../context/userContext';
+import Axios from 'axios';
 
 function AuthOptions() {
   const { userData, setUserData } = useContext(UserContext);
@@ -9,13 +10,16 @@ function AuthOptions() {
 
   const signup = () => history.push('./sign-up');
   const login = () => history.push('./login');
-  const logout = () => {
+  const logout = async () => {
+    const logoutResponse = await Axios.post(
+      'http://localhost:5000/users/logout',
+      { withCredentials: true }
+    );
     setUserData({
-      token: undefined,
       user: undefined,
     });
     localStorage.clear();
-    history.push('./login');
+    history.push('/login');
   };
 
   return (

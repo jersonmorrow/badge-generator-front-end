@@ -9,6 +9,8 @@ import logo from '../../../assets/logo.png';
 import homeBackground from '../../../assets/home-image.jpg';
 
 function Login() {
+  Axios.defaults.withCredentials = true;
+
   const { register, handleSubmit, errors, formState } = useForm({
     mode: 'onBlur',
   });
@@ -29,10 +31,9 @@ function Login() {
         }
       );
       setUserData({
-        token: loginResponse.data.token,
         user: loginResponse.data.user,
       });
-      localStorage.setItem('auth-token', loginResponse.data.token);
+      localStorage.setItem('user', loginResponse.data.user);
       history.push('/events');
     } catch (error) {
       error.response.data.msg && setError(error.response.data.msg);

@@ -25,17 +25,18 @@ const api = {
       const config = {
         method: 'GET',
         headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
+          'Content-Type': 'application/json',
         },
+        withCredentials: true,
       };
       return callApi('/events/', config);
     },
-    create(event, token) {
+    async create(event) {
       const data = event;
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'x-auth-token': token,
+          'x-auth-token': await localStorage.getItem('auth-token'),
         },
         method: 'POST',
         data: data,
@@ -50,21 +51,21 @@ const api = {
       };
       return callApi(`/events/${eventId}`, config);
     },
-    update(eventId, updates, token) {
+    async update(eventId, updates) {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'x-auth-token': token,
+          'x-auth-token': await localStorage.getItem('auth-token'),
         },
         method: 'PATCH',
         data: updates,
       };
       return callApi(`/events/update/${eventId}`, config);
     },
-    remove(eventId, token) {
+    async remove(eventId) {
       const config = {
         headers: {
-          'x-auth-token': token,
+          'x-auth-token': await localStorage.getItem('auth-token'),
         },
         method: 'DELETE',
       };

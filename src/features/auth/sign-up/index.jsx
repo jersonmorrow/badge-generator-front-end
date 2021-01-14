@@ -17,6 +17,7 @@ function SignUp() {
     e.preventDefault();
     const { firstName, lastName, email, password, passwordCheck } = data;
     await Axios.post('http://localhost:5000/users/sign-up', data);
+    Axios.defaults.withCredentials = true;
     const loginResponse = await Axios.post(
       'http://localhost:5000/users/login',
       {
@@ -25,10 +26,9 @@ function SignUp() {
       }
     );
     setUserData({
-      token: loginResponse.data.token,
       user: loginResponse.data.user,
     });
-    localStorage.setItem('auth-token', loginResponse.data.token);
+    localStorage.setItem('user', loginResponse.data.user);
     history.push('/events');
   };
 

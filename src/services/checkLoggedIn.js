@@ -1,22 +1,23 @@
 import Axios from 'axios';
 
 export const checkLoggedIn = async (setUserData) => {
-  let token = localStorage.getItem('auth-token');
-  if (!token) {
+  let user = localStorage.getItem('user');
+
+  if (!user) {
     localStorage.clear();
-  }
-  const tokenResponse = await Axios.post(
-    'http://localhost:5000/users/tokenIsValid',
-    null,
-    { headers: { 'x-auth-token': token } }
-  );
-  if (tokenResponse.data) {
-    const userResponse = await Axios.get('http://localhost:5000/users/', {
-      headers: { 'x-auth-token': token },
-    });
-    setUserData({
-      token,
-      user: userResponse.data,
-    });
+  } else {
+    const validateUser = await Axios.post(
+      'http://localhost:5000/users/tokenIsValid',
+      null,
+      { withCredentials: true }
+    );
+    if (validateUser.data) {
+      const userResponse = await Axios.get('http://localhost:5000/users/', {
+        withCredentials: true,
+      });
+      setUserData({
+        user: userResponse.data,
+      });
+    }
   }
 };
