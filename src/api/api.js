@@ -8,6 +8,8 @@ const simulateNetworkLatency = (min = 30, max = 1500) =>
 
 const instance = Axios.create({
   baseURL: 'http://localhost:5000',
+  withCredentials: true,
+  headers: { 'Content-Type': 'application/json' },
 });
 
 async function callApi(endpoint, options) {
@@ -21,93 +23,67 @@ async function callApi(endpoint, options) {
 
 const api = {
   events: {
-    async list() {
+    list() {
       const config = {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
       };
       return callApi('/events/', config);
     },
-    async create(event) {
+    create(event) {
       const data = event;
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'x-auth-token': await localStorage.getItem('auth-token'),
         },
         method: 'POST',
         data: data,
       };
       return callApi('/events/new-event', config);
     },
-    async read(eventId) {
-      const config = {
-        headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
-        },
-      };
-      return callApi(`/events/${eventId}`, config);
+    read(eventId) {
+      return callApi(`/events/${eventId}`);
     },
-    async update(eventId, updates) {
+    update(eventId, updates) {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'x-auth-token': await localStorage.getItem('auth-token'),
         },
         method: 'PATCH',
         data: updates,
       };
       return callApi(`/events/update/${eventId}`, config);
     },
-    async remove(eventId) {
+    remove(eventId) {
       const config = {
-        headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
-        },
         method: 'DELETE',
       };
       return callApi(`/events/delete/${eventId}`, config);
     },
   },
   badges: {
-    async list(eventId) {
+    list(eventId) {
       const config = {
         method: 'GET',
-        headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
-        },
       };
       return callApi(`/badges/${eventId}`, config);
     },
-    async create(badge, eventId) {
+    create(badge, eventId) {
       const data = badge;
       const config = {
-        headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
-        },
         method: 'POST',
         data: data,
       };
       return callApi(`/badges/new-badge/${eventId}`, config);
     },
-    async update(updates, badgeId) {
+    update(updates, badgeId) {
       const config = {
-        headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
-        },
         method: 'PATCH',
         data: updates,
       };
       return callApi(`/badges/update/${badgeId}`, config);
     },
-    async remove(badgeId) {
+    remove(badgeId) {
       const config = {
-        headers: {
-          'x-auth-token': await localStorage.getItem('auth-token'),
-        },
         method: 'DELETE',
       };
       return callApi(`/badges/delete/${badgeId}`, config);
