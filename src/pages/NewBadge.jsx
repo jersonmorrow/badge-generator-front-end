@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
 import defaultImage from '../assets/default-image.png';
 import defaultBackgroundImage from '../assets/default-background-image.png';
+import PageError from '../pages/PageError';
 
 function NewBadge(props) {
   const { register, handleSubmit, errors, watch, formState } = useForm({
@@ -40,6 +41,10 @@ function NewBadge(props) {
 
   if (loading) {
     return <PageLoading />;
+  }
+
+  if (error) {
+    return <PageError error={error} />;
   }
 
   return (

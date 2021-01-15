@@ -7,14 +7,12 @@ import PageError from './PageError';
 import Loader from 'react-loader-spinner';
 import { fetchLogo } from '../services/fetchLogo';
 import defaultImage from '../assets/default-image.png';
-import BadgeInfoFooter from '../features/badges/badgeInfoFooter';
 
 function Badges(props) {
   const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
-  // const { eventData } = props.location.aboutProps;
   localStorage.setItem('event-id', eventId);
   const [eventLogo, setEventLogo] = useState(defaultImage);
 
@@ -72,7 +70,6 @@ function Badges(props) {
           )}
         </div>
       </div>
-      {/* <BadgeInfoFooter eventData={eventData} /> */}
     </section>
   );
 }

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import Loader from 'react-loader-spinner';
 import api from '../api/api.js';
+import PageError from '../pages/PageError';
 
 function BadgeDetails(props) {
   const [badge, setBadge] = useState({
@@ -47,6 +48,10 @@ function BadgeDetails(props) {
       setError({ error: error });
     }
   };
+
+  if (error) {
+    return <PageError error={error} />;
+  }
 
   return (
     <section className="section">

@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import defaultBackgroundImage from '../assets/default-background-image.png';
 import Loader from 'react-loader-spinner';
+import PageError from '../pages/PageError';
 
 function BadgeEdit(props) {
   const [badge, setBadge] = useState({
@@ -70,6 +71,10 @@ function BadgeEdit(props) {
       setError(error);
     }
   };
+
+  if (error) {
+    return <PageError error={error} />;
+  }
 
   return (
     <section className="section">
