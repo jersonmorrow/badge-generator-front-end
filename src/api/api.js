@@ -75,6 +75,9 @@ const api = {
       };
       return callApi(`/badges/new-badge/${eventId}`, config);
     },
+    read(badgeId) {
+      return callApi(`/badges/badge/${badgeId}`);
+    },
     update(updates, badgeId) {
       const config = {
         method: 'PATCH',
