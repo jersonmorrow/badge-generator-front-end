@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import defaultImage from '../../../assets/default-image.png';
 
 function EventForm(props) {
   const { onSubmit, register, errors, control, formState } = props;
+  const [picture, setPicture] = useState(defaultImage);
+  const onChangePicture = (e) => {
+    setPicture(URL.createObjectURL(e.target.files[0]));
+  };
 
   return (
     <form onSubmit={onSubmit} encType="multipart/form-data">
@@ -86,16 +91,37 @@ function EventForm(props) {
         </div>
 
         <div className="column is-flex">
-          <div className="is-flex-direction-column is-align-items-center is-justify-content-center	">
-            <p>Event Image (Optional)</p>
-            <input
-              className="input"
-              type="file"
-              accept="image/png, image/jpeg"
-              multiple="false"
-              name="img"
-              ref={register}
-            />
+          <div className="column is-one-fifth is-flex is-flex-direction-column is-justify-content-center  is-align-items-center">
+            <figure className="image is-96x96">
+              <img
+                width="96px"
+                className="is-rounded is-vcentered"
+                src={picture}
+                alt="event-image"
+              />
+            </figure>
+
+            <div className="field mt-3">
+              <div className="file is-small">
+                <label className="file-label">
+                  <input
+                    className="file-input"
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    multiple="false"
+                    name="img"
+                    ref={register}
+                    onChange={onChangePicture}
+                  />
+                  <span className="file-cta">
+                    <span className="file-icon">
+                      <i className="fas fa-upload"></i>
+                    </span>
+                    <span className="file-label">Upload</span>
+                  </span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
