@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DeleteModal from '../../modals/deleteModal';
 import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
+import api from '../../../api/api';
+import Loader from 'react-loader-spinner';
 
 function BadgesListItem(props) {
   const { badgeItem, eventLogo } = props;
   const badgeId = badgeItem._id;
+  const [loading, setLoading] = useState(false);
 
-  const {
-    modal,
-    handleDeleteBadge,
-    handleOpenModal,
-    handleCloseModal,
-  } = useDeleteItems(badgeItem);
+  const { modal, handleOpenModal, handleCloseModal } = useDeleteItems(
+    badgeItem
+  );
+
+  const handleDeleteBadge = async (e) => {
+    setLoading(true);
+
+    try {
+      await api.badges.remove(badgeId);
+      handleCloseModal();
+      setLoading(true);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  if (loading === true) {
+    return (
+      <Loader
+        type="ThreeDots"
+        color="#00BFFF"
+        height={30}
+        width={30}
+        timeout={3000}
+      />
+    );
+  }
 
   return (
     <div className="is-flex is-align-items-center">

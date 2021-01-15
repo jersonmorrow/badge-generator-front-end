@@ -10,7 +10,7 @@ function SearchBadges(props) {
         <input
           className="input"
           type="text"
-          placeholder="Find badges"
+          placeholder="Filter badges"
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);

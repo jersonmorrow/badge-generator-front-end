@@ -21,20 +21,10 @@ function useDeleteItems(props) {
     }
   };
 
-  const handleDeleteBadge = async (e) => {
-    try {
-      await api.badges.remove(props._id);
-      props.history.push('/badges');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return {
     modal,
     setModal,
     handleDeleteEvent,
-    handleDeleteBadge,
     handleOpenModal,
     handleCloseModal,
   };
