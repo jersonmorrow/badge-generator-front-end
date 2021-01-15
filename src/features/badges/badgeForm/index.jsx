@@ -49,10 +49,19 @@ function BadgeForm(props) {
             name="email"
             ref={register({
               required: true,
+              pattern: {
+                value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              },
             })}
           />
           {errors.email?.type === 'required' && (
             <p className="help is-danger">This is a required field</p>
+          )}
+          {errors.email?.type === 'pattern' && (
+            <p className="help is-danger">
+              Please enter a valid email address. For example:
+              amysmith@domain.com{' '}
+            </p>
           )}
         </div>
       </div>
@@ -107,9 +116,14 @@ function BadgeForm(props) {
       </div>
 
       <div className="field is-grouped">
-        <Link to={`/${eventId}/badges`} className="control">
-          <button className="button is-danger is-normal">Cancel</button>
-        </Link>
+        <p className="control">
+          <Link
+            to={`/${eventId}/badges`}
+            className="button is-danger is-normal"
+          >
+            Cancel
+          </Link>
+        </p>
 
         <p className="control">
           <button
