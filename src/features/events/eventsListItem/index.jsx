@@ -26,7 +26,7 @@ function EventsListItem(props) {
   };
 
   const formatDate = () => {
-    const date = Date(eventItem.date);
+    const date = eventItem.date;
     const formattedDate = Moment(date).format('LL');
     setDate(formattedDate);
   };
