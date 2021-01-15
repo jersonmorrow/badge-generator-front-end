@@ -1,18 +1,52 @@
-import React, { useRef, createRef } from 'react';
+import React, { createRef, useState, useEffect } from 'react';
 import defaultBackgroundImage from '../assets/default-background-image.jpg';
 import defaultImage from '../assets/default-image.png';
 import Badge from '../features/badges/badge';
 import { Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
+import Loader from 'react-loader-spinner';
+import api from '../api/api.js';
 
 function BadgeDetails(props) {
-  const { badgeData } = props.location.aboutProps;
+  const [badge, setBadge] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    jobTitle: '',
+    categorie: '',
+    badgeImage: '',
+  });
+
+  const { badgeId } = props.match.params;
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const eventLogo = localStorage.getItem('event-logo');
   const eventId = localStorage.getItem('event-id');
   const componentRef = createRef();
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await api.badges.read(badgeId);
+      setBadge(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError({ error: error });
+    }
+  };
 
   return (
     <section className="section">
@@ -20,16 +54,28 @@ function BadgeDetails(props) {
         <div className="columns">
           <div className="column"></div>
           <div className="column is-one-third">
-            <Badge
-              ref={componentRef}
-              firstName={badgeData.firstName || 'FIRST NAME'}
-              lastName={badgeData.lastName || 'LAST NAME'}
-              email={badgeData.email || 'EMAIL'}
-              jobTitle={badgeData.jobTitle || 'JOBTITLE'}
-              categorie={badgeData.categorie || 'CATEGORIE'}
-              badgeImage={badgeData.badgeImage || defaultBackgroundImage}
-              eventLogo={eventLogo || defaultImage}
-            />
+            {loading ? (
+              <div className="is-flex is-justify-content-center is-align-content-center is-align-items-center pt-6">
+                <Loader
+                  type="Oval"
+                  color="#00BFFF"
+                  height={40}
+                  width={40}
+                  timeout={3000}
+                />
+              </div>
+            ) : (
+              <Badge
+                ref={componentRef}
+                firstName={badge.firstName || 'FIRST NAME'}
+                lastName={badge.lastName || 'LAST NAME'}
+                email={badge.email || 'EMAIL'}
+                jobTitle={badge.jobTitle || 'JOBTITLE'}
+                categorie={badge.categorie || 'CATEGORIE'}
+                badgeImage={badge.badgeImage || defaultBackgroundImage}
+                eventLogo={eventLogo || defaultImage}
+              />
+            )}
           </div>
           <div className="field is-grouped">
             <Link to={`/${eventId}/badges`} className="control">

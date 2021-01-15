@@ -39,15 +39,7 @@ function BadgesListItem(props) {
       </div>
 
       <div className="field is-grouped">
-        <Link
-          className="button is primary"
-          to={{
-            pathname: `/${badgeId}/edit-badge`,
-            aboutProps: {
-              data: badgeItem,
-            },
-          }}
-        >
+        <Link className="button is primary" to={`/${badgeId}/edit-badge`}>
           Edit
         </Link>
         <p className="control">
