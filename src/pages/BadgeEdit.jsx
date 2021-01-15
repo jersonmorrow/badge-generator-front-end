@@ -5,7 +5,7 @@ import defaultImage from '../assets/default-image.png';
 import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import defaultBackgroundImage from '../assets/default-background-image.jpg';
+import defaultBackgroundImage from '../assets/default-background-image.png';
 import Loader from 'react-loader-spinner';
 
 function BadgeEdit(props) {

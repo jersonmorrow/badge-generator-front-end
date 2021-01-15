@@ -1,5 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
-import defaultBackgroundImage from '../assets/default-background-image.jpg';
+import defaultBackgroundImage from '../assets/default-background-image.png';
 import defaultImage from '../assets/default-image.png';
 import Badge from '../features/badges/badge';
 import { Link } from 'react-router-dom';

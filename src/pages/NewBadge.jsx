@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BadgeForm from '../features/badges/badgeForm';
 import Badge from '../features/badges/badge';
 import { useForm } from 'react-hook-form';
@@ -6,6 +6,7 @@ import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
 import defaultImage from '../assets/default-image.png';
+import defaultBackgroundImage from '../assets/default-background-image.png';
 
 function NewBadge(props) {
   const { register, handleSubmit, errors, watch, formState } = useForm({
@@ -13,9 +14,6 @@ function NewBadge(props) {
     reValidateMode: 'onChange',
   });
   const { eventId } = props.match.params;
-  const [badgeImage, setBadgeImage] = useState(
-    'https://i.pinimg.com/originals/56/d8/44/56d844bff35317eda6a42544f71ecd4c.jpg'
-  );
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -56,7 +54,7 @@ function NewBadge(props) {
               email={watchAllFields.email || 'EMAIL'}
               jobTitle={watchAllFields.jobTitle || 'JOBTITLE'}
               categorie={watchAllFields.categorie || 'CATEGORIE'}
-              badgeImage={watchAllFields.badgeImage || badgeImage}
+              badgeImage={watchAllFields.badgeImage || defaultBackgroundImage}
               eventLogo={eventLogo || defaultImage}
             />
           </div>
