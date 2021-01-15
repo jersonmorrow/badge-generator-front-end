@@ -1,37 +1,20 @@
-import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-// import Axios from 'axios';
 
-const PublicRoute = ({ component: Component, ...rest }) => {
-  // const isAuthenticated = async () => {
-  //   let user = localStorage.getItem('user');
-  //   if (user) {
-  //     const validateUser = await Axios.post(
-  //       'http://localhost:5000/users/tokenIsValid',
-  //       null,
-  //       { withCredentials: true }
-  //     );
-  //     return validateUser;
-  //   } else {
-  //     localStorage.clear();
-  //     return false;
-  //   }
-  // };
-
-  const isAuthenticated = localStorage.getItem('user');
+function PublicRoute({ component: Component, ...rest }) {
+  let isAuth = localStorage.getItem('user');
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (!isAuthenticated) {
-          return <Component {...rest} {...props} />;
-        } else {
+        if (isAuth) {
           return <Redirect to="/events" />;
+        } else {
+          return <Component {...rest} {...props} />;
         }
       }}
     />
   );
-};
+}
 
 export default PublicRoute;

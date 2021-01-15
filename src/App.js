@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
 import NewEvent from './pages/NewEvent';
 import Events from './pages/Events';
@@ -30,11 +30,11 @@ function App() {
       <UserContext.Provider value={{ userData, setUserData }}>
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
-          <Route exact path="/login" component={Login} />
+          <PublicRoute exact path="/login" component={Login} />
           <PublicRoute exact path="/sign-up" component={SignUp} />
 
           <Layout>
-            <Route exact path="/events" component={Events} />
+            <ProtectedRoute exact path="/events" component={Events} />
 
             <ProtectedRoute path="/new-event" component={NewEvent} />
             <ProtectedRoute path="/:eventId/edit" component={EventEdit} />

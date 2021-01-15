@@ -3,9 +3,7 @@ import Axios from 'axios';
 export const checkLoggedIn = async (setUserData) => {
   let user = localStorage.getItem('user');
 
-  if (!user) {
-    localStorage.clear();
-  } else {
+  if (user) {
     const validateUser = await Axios.post(
       'http://localhost:5000/users/tokenIsValid',
       null,
@@ -18,6 +16,12 @@ export const checkLoggedIn = async (setUserData) => {
       setUserData({
         user: userResponse.data,
       });
+      console.log('token valido');
+    } else {
+      console.log('token Invalido');
+      alert('Invalid session');
     }
+  } else {
+    console.log('userData es undefined');
   }
 };
