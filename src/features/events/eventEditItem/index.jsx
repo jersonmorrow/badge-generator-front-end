@@ -4,10 +4,11 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import defaultImage from '../../../assets/default-image.png';
 
 const EventEditItem = (props) => {
   const { data, onSubmit } = props;
-  const [picture, setPicture] = useState(data.eventImage);
+  const [picture, setPicture] = useState(data.eventImage || defaultImage);
 
   const { register, control, handleSubmit } = useForm({
     mode: 'onChange',

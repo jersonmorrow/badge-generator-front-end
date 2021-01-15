@@ -8,7 +8,7 @@ function EventsList(props) {
   const { events } = props;
   const { query, setQuery, filteredItems } = useSearchItem(events);
 
-  if (!filteredItems) {
+  if (filteredItems.length === 0) {
     return (
       <div>
         <div className="columns">
@@ -17,10 +17,7 @@ function EventsList(props) {
           </div>
         </div>
 
-        <h3>No Events were found</h3>
-        <Link className="button is-success" to="/new-event">
-          New Event
-        </Link>
+        <h3>No Events were found!</h3>
       </div>
     );
   }
