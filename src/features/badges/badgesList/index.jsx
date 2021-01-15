@@ -7,8 +7,9 @@ import SearchBadges from '../searchBadges';
 function BadgesList(props) {
   const { badges, eventLogo } = props;
   const { query, setQuery, filteredItems } = useSearchItem(badges);
+  const eventId = localStorage.getItem('event-id');
 
-  if (!filteredItems) {
+  if (filteredItems.length === 0) {
     return (
       <div>
         <div className="columns">
@@ -17,8 +18,8 @@ function BadgesList(props) {
           </div>
         </div>
 
-        <h3>No Badges were found</h3>
-        <Link className="button is-success" to="/new-badge">
+        <h3>No Badges were found, let's create a new badge</h3>
+        <Link className="button is-success" to={`/${eventId}/new-badge`}>
           New Badge
         </Link>
       </div>
