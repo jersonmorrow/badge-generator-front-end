@@ -34,24 +34,26 @@ function NewEvent() {
   };
 
   return (
-    <React.Fragment>
-      <div className="container is-flex is-justify-content-center mx-6">
-        <div classNam="column">
-          <div className="my-6">
-            <strong>
-              <p className="title is-5">Create a New Event</p>
-            </strong>
+    <section className="section">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-three-fifths is-offset-one-fifth">
+            <div className="my-6">
+              <strong>
+                <p className="title is-4">Create a New Event</p>
+              </strong>
+            </div>
+            <EventForm
+              onSubmit={handleSubmit(onSubmit)}
+              register={register}
+              errors={errors}
+              control={control}
+              formState={formState}
+            />
           </div>
-          <EventForm
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            errors={errors}
-            control={control}
-            formState={formState}
-          />
         </div>
       </div>
-    </React.Fragment>
+    </section>
   );
 }
 
