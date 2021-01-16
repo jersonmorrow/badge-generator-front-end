@@ -27,7 +27,7 @@ function BadgesListItem(props) {
     }
   };
 
-  if (loading === true) {
+  if (loading) {
     return (
       <Loader
         type="ThreeDots"
@@ -40,39 +40,58 @@ function BadgesListItem(props) {
   }
 
   return (
-    <div className="is-flex is-align-items-center">
-      <div>
-        <figure className="image is-96x96">
+    <div className="is-flex is-align-items-center is-justify-content-space-between">
+      <div className="is-flex ml-3 is-align-items-center">
+        <figure className="image is-96x96 m-0">
           <img
-            width="96px"
+            width="90px"
             className="is-rounded is-vcentered"
             src={eventLogo}
             alt="event-image"
           />
         </figure>
-      </div>
-
-      <div className="mx-4">
-        <strong>
-          <p className="title is-5">{`${badgeItem.firstName} ${badgeItem.lastName}`}</p>
-        </strong>
-        <p className="subtitle is-6 m-0">{badgeItem.email}</p>
-        <p className="subtitle is-6 m-0">{badgeItem.jobTitle}</p>
-        <div>
-          <p className="subtitle is-6 m-0">{badgeItem.categorie}</p>
+        <div className="ml-5">
+          <strong>
+            <p className="title is-5">{`${badgeItem.firstName} ${badgeItem.lastName}`}</p>
+          </strong>
+          <p className="subtitle is-6 m-0">{badgeItem.email}</p>
+          <p className="subtitle is-6 m-0">{badgeItem.jobTitle}</p>
+          <div>
+            <p className="subtitle is-6 mt-3">
+              <span class="tag is-primary is-light is-medium">
+                {badgeItem.categorie}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="field is-grouped">
-        <Link className="button is primary" to={`/${badgeId}/edit-badge`}>
-          Edit
-        </Link>
+      <div className="mr-3 field is-grouped">
+        <p className="control">
+          <Link className="button is-success" to={`/badges/${badgeId}`}>
+            <span>Print Badge</span>
+            <span class="icon is-small">
+              <i class="fas fa-print"></i>
+            </span>
+          </Link>
+        </p>
+
+        <p className="control">
+          <Link className="button" to={`/${badgeId}/edit-badge`}>
+            <span class="icon is-small">
+              <i class="fas fa-edit"></i>
+            </span>
+          </Link>
+        </p>
+
         <p className="control">
           <button
             onClick={handleOpenModal}
             className="button is-danger is-normal"
           >
-            Delete
+            <span class="icon is-small">
+              <i class="fas fa-trash-alt"></i>
+            </span>
           </button>
           <DeleteModal
             isOpen={modal}
