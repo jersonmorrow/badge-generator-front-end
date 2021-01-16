@@ -4,20 +4,31 @@ import Moment from 'moment';
 import DeleteModal from '../../modals/deleteModal';
 import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
+import api from '../../../api/api';
 
 function EventsListItem(props) {
   const { eventItem } = props;
   const eventId = eventItem._id;
+  const [loading, setLoading] = useState(false);
 
   const [image, setImage] = useState(defaultImage);
   const [date, setDate] = useState('');
 
-  const {
-    modal,
-    handleDeleteEvent,
-    handleOpenModal,
-    handleCloseModal,
-  } = useDeleteItems(eventItem);
+  const { modal, handleOpenModal, handleCloseModal } = useDeleteItems();
+
+  const handleDeleteEvent = async (e) => {
+    setLoading(true);
+
+    try {
+      await api.events.remove(eventId);
+      handleCloseModal();
+      setLoading(true);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   const getImage = () => {
     if (eventItem.eventImage) {
@@ -35,6 +46,18 @@ function EventsListItem(props) {
     getImage();
     formatDate();
   });
+
+  if (loading) {
+    return (
+      <Loader
+        type="ThreeDots"
+        color="#00BFFF"
+        height={30}
+        width={30}
+        timeout={3000}
+      />
+    );
+  }
 
   return (
     <div className="is-flex is-align-items-center">
