@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
@@ -6,11 +6,21 @@ import { Link } from 'react-router-dom';
 import defaultImage from '../../../assets/default-image.png';
 
 function EventForm(props) {
-  const { onSubmit, register, errors, control, formState } = props;
+  const { onSubmit, register, errors, control, formState, eventImage } = props;
   const [picture, setPicture] = useState(defaultImage);
   const onChangePicture = (e) => {
     setPicture(URL.createObjectURL(e.target.files[0]));
   };
+
+  const getEventImage = () => {
+    if (eventImage) {
+      setPicture(eventImage);
+    }
+  };
+
+  useEffect(() => {
+    getEventImage();
+  }, []);
 
   return (
     <form onSubmit={onSubmit} encType="multipart/form-data">
@@ -104,7 +114,7 @@ function EventForm(props) {
                 className="button is-success is-normal"
                 disabled={!formState.isValid}
               >
-                Create event
+                Save
               </button>
             </p>
           </div>
