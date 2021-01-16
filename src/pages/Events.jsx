@@ -55,10 +55,10 @@ function Events() {
         <div className="is-flex is-justify-content-center">
           {loading && (
             <Loader
-              type="Grid"
+              type="ThreeDots"
               color="#00BFFF"
-              height={50}
-              width={50}
+              height={30}
+              width={30}
               timeout={3000}
             />
           )}

@@ -120,9 +120,11 @@ const EventEditItem = (props) => {
           />
         </div>
         <div className="column field is-grouped">
-          <Link to="/events" className="control">
-            <button className="button is-danger is-normal">Cancel</button>
-          </Link>
+          <p className="control">
+            <Link to="/events" className="button is-danger is-normal">
+              Cancel
+            </Link>
+          </p>
 
           <p className="control">
             <button type="submit" className="button is-success is-normal">

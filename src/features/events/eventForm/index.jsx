@@ -127,9 +127,11 @@ function EventForm(props) {
       </div>
 
       <div className="field is-grouped">
-        <Link to="/events" className="control">
-          <button className="button is-danger is-normal">Cancel</button>
-        </Link>
+        <p className="control">
+          <Link to="/events" className="button is-danger is-normal">
+            Cancel
+          </Link>
+        </p>
 
         <p className="control">
           <button
