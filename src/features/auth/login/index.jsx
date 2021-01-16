@@ -6,7 +6,7 @@ import Axios from 'axios';
 import { checkUserLogin } from '../../../services/checkUser';
 import ErrorNotice from '../../../misc/ErrorNotice';
 import logo from '../../../assets/logo.png';
-import homeBackground from '../../../assets/home-image.jpg';
+import homeBackground from '../../../assets/login-image.jpg';
 
 function Login() {
   Axios.defaults.withCredentials = true;
@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <div className="columns is-vcentered">
-      <div className="login column is-4 ">
+      <div className="login column">
         <section className="section">
           <div className="has-text-centered">
             <img className="login-logo" src={logo} alt="logo" />
@@ -111,7 +111,8 @@ function Login() {
                   Log in
                 </button>
                 <div class="has-text-centered">
-                  Don't have an account?
+                  <p>Don't have an account?</p>
+
                   <Link to="./sign-up">Sign up</Link>
                 </div>
               </div>

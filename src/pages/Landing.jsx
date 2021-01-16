@@ -1,17 +1,26 @@
 import React from 'react';
 import homeBackground from '../assets/home-image.jpg';
 import AuthOptions from '../features/auth/authOptions';
+import logo from '../assets/logo.png';
 
 function Landing() {
   return (
     <div>
-      <div className="columns is-vcentered">
-        <div className="column is-4 is-flex is-justify-content-center">
-          <h3 className="title is-3">Start!</h3>
-          <AuthOptions />
-        </div>
-        <div className="column is-8">
+      <div className="columns">
+        <div className="column is-two-fifths">
           <img src={homeBackground} alt="home-background" />
+        </div>
+        <div className="column is-flex-direction-column is-flex is-justify-content-center is-align-items-center">
+          <div className="has-text-centered">
+            <img src={logo} alt="logo" />
+          </div>
+          <div>
+            <p className="title is-3">
+              Store your badges and events in one place!{' '}
+            </p>
+            <p className="title is-5">Start Today!</p>
+            <AuthOptions />
+          </div>
         </div>
       </div>
     </div>
