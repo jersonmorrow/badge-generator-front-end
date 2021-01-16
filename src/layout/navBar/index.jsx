@@ -14,18 +14,22 @@ function NavBar() {
         role="navigation"
         aria-label="main navigation"
       >
-        <div className="navbar-brand">
+        <div className="navbar-brand pl-4">
           <Link to="/events">
-            <img src={logo} alt="logo" width="90" />
+            <img src={logo} alt="logo" width="70" />
           </Link>
         </div>
 
         <div className="navbar-end">
-          {userData.user ? (
-            <p>Wellcome {userData.user.name}</p>
-          ) : (
-            <p>Start Today</p>
-          )}
+          <div className="navbar-item">
+            {userData.user ? (
+              <p>Wellcome {userData.user.name}!</p>
+            ) : (
+              <p>Start Today</p>
+            )}
+          </div>
+        </div>
+        <div className="navbar-end">
           <div className="navbar-item">
             <AuthOptions />
           </div>

@@ -45,23 +45,27 @@ function Events() {
 
   return (
     <section className="section">
-      <div className="container mx-6">
-        <div className="is-flex is-justify-content-flex-end	">
-          <Link className="button is-success" to="/new-event">
-            New event
-          </Link>
-        </div>
-        <EventsList events={data} />
-        <div className="is-flex is-justify-content-center">
-          {loading && (
-            <Loader
-              type="ThreeDots"
-              color="#00BFFF"
-              height={30}
-              width={30}
-              timeout={3000}
-            />
-          )}
+      <div className="container">
+        <div className="columns">
+          <div className="column is-three-fifths is-offset-one-fifth">
+            <div className="is-flex is-justify-content-flex-end	">
+              <Link className="button is-success" to="/new-event">
+                New event
+              </Link>
+            </div>
+            <EventsList events={data} />
+            <div className="is-flex is-justify-content-center">
+              {loading && (
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                  timeout={3000}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>
