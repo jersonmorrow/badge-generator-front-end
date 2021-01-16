@@ -52,40 +52,51 @@ function EventsListItem(props) {
   }
 
   return (
-    <div className="is-flex is-align-items-center">
-      <div>
-        <figure className="image is-96x96">
+    <div className="is-flex is-align-items-center is-justify-content-space-between">
+      <div className="is-flex ml-3 is-align-items-center">
+        <figure className="image is-96x96 m-0">
           <img
-            width="96px"
+            width="90px"
             className="is-rounded is-vcentered"
             src={eventImage}
             alt="event-image"
           />
         </figure>
+        <div className="ml-5">
+          <strong>
+            <p className="title is-5">{eventItem.title}</p>
+          </strong>
+          <p className="subtitle is-6 m-0">{eventItem.organizer}</p>
+          <p className="subtitle is-6 m-0">{date}</p>
+          <p className="subtitle is-6 m-0">{eventItem.location}</p>
+        </div>
       </div>
 
-      <div className="mx-4">
-        <strong>
-          <p className="title is-5">{eventItem.title}</p>
-        </strong>
-        <p className="subtitle is-6 m-0">{eventItem.organizer}</p>
-        <p className="subtitle is-6 m-0">{date}</p>
-        <p className="subtitle is-6 m-0">{eventItem.location}</p>
-      </div>
+      <div className="mr-3 field is-grouped">
+        <p className="control">
+          <Link className="button is-success" to={`/${eventId}/badges`}>
+            <span>Badges</span>
+            <span class="icon is-small">
+              <i class="fas fa-id-badge"></i>
+            </span>
+          </Link>
+        </p>
+        <p className="control">
+          <Link className="button is primary" to={`/${eventId}/edit`}>
+            <span class="icon is-small">
+              <i class="fas fa-edit"></i>
+            </span>
+          </Link>
+        </p>
 
-      <div className="field is-grouped">
-        <Link className="button is-success" to={`/${eventId}/badges`}>
-          Badges
-        </Link>
-        <Link className="button is primary" to={`/${eventId}/edit`}>
-          Edit
-        </Link>
         <p className="control">
           <button
             onClick={handleOpenModal}
             className="button is-danger is-normal"
           >
-            Delete Event
+            <span class="icon is-small">
+              <i class="fas fa-trash-alt"></i>
+            </span>
           </button>
           <DeleteModal
             isOpen={modal}

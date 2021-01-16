@@ -24,8 +24,8 @@ function EventsList(props) {
 
   return (
     <div>
-      <div className="columns">
-        <div className="column">
+      <div className="mb-5">
+        <div>
           <SearchEvents query={query} setQuery={setQuery} />
         </div>
       </div>
