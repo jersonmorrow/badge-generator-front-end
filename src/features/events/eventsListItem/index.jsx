@@ -11,8 +11,7 @@ function EventsListItem(props) {
   const { eventItem } = props;
   const eventId = eventItem._id;
   const [loading, setLoading] = useState(false);
-
-  const [image, setImage] = useState(defaultImage);
+  const [eventImage] = useState(eventItem.eventImage || defaultImage);
   const [date, setDate] = useState('');
 
   const { modal, handleOpenModal, handleCloseModal } = useDeleteItems();
@@ -30,12 +29,6 @@ function EventsListItem(props) {
     }
   };
 
-  const getImage = () => {
-    if (eventItem.eventImage) {
-      setImage(eventItem.eventImage);
-    }
-  };
-
   const formatDate = () => {
     const date = eventItem.date;
     const formattedDate = Moment(date).format('LL');
@@ -43,7 +36,6 @@ function EventsListItem(props) {
   };
 
   useEffect(() => {
-    getImage();
     formatDate();
   });
 
@@ -66,7 +58,7 @@ function EventsListItem(props) {
           <img
             width="96px"
             className="is-rounded is-vcentered"
-            src={image}
+            src={eventImage}
             alt="event-image"
           />
         </figure>
@@ -82,15 +74,7 @@ function EventsListItem(props) {
       </div>
 
       <div className="field is-grouped">
-        <Link
-          className="button is-success"
-          to={{
-            pathname: `/${eventId}/badges`,
-            aboutProps: {
-              eventData: eventItem,
-            },
-          }}
-        >
+        <Link className="button is-success" to={`/${eventId}/badges`}>
           Badges
         </Link>
         <Link className="button is primary" to={`/${eventId}/edit`}>

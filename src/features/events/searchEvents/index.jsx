@@ -10,7 +10,7 @@ function SearchEvents(props) {
         <input
           className="input"
           type="text"
-          placeholder="Find an Event"
+          placeholder="Filter an Event"
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
