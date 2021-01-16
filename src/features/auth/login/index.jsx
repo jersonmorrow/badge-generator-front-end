@@ -73,13 +73,10 @@ function Login() {
                   <span className="icon is-small is-left">
                     <i className="fas fa-envelope"></i>
                   </span>
-                  <span className="icon is-small is-right">
-                    <i className="fas fa-check"></i>
-                  </span>
 
                   {errors.email?.type === 'validate' && (
                     <p className="help is-danger">
-                      No account with this email exists
+                      No account found with this email address.
                     </p>
                   )}
 
@@ -98,20 +95,11 @@ function Login() {
                     placeholder="Password"
                     id="login-password"
                     autoComplete="password"
-                    ref={register({
-                      required: true,
-                    })}
+                    ref={register}
                   />
                   <span className="icon is-small is-left">
                     <i className="fas fa-lock"></i>
                   </span>
-                  <span className="icon is-small is-right">
-                    <i className="fas fa-check"></i>
-                  </span>
-
-                  {errors.password?.type === 'required' && (
-                    <p className="help is-danger">This is a required field</p>
-                  )}
                 </div>
               </div>
               <div className="control">
@@ -123,7 +111,7 @@ function Login() {
                   Log in
                 </button>
                 <div class="has-text-centered">
-                  Don't you have an account?
+                  Don't have an account?
                   <Link to="./sign-up">Sign up</Link>
                 </div>
               </div>

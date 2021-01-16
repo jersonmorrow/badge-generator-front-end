@@ -11,10 +11,9 @@ function AuthOptions() {
   const signup = () => history.push('./sign-up');
   const login = () => history.push('./login');
   const logout = async () => {
-    const logoutResponse = await Axios.post(
-      'http://localhost:5000/users/logout',
-      { withCredentials: true }
-    );
+    await Axios.post('http://localhost:5000/users/logout', {
+      withCredentials: true,
+    });
     setUserData({
       user: undefined,
     });
