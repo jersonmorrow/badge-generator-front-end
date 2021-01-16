@@ -15,8 +15,10 @@ function SignUp() {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { firstName, lastName, email, password, passwordCheck } = data;
+
     await Axios.post('http://localhost:5000/users/sign-up', data);
+
+    const { email, password } = data;
     Axios.defaults.withCredentials = true;
     const loginResponse = await Axios.post(
       'http://localhost:5000/users/login',
@@ -150,16 +152,14 @@ function SignUp() {
                   id="signup-passwordCheck"
                   placeholder="Confirm Password"
                   ref={register({
-                    required: true,
                     validate: (value) =>
                       value === getValues('password') || 'error message',
                   })}
                 />
                 {errors.passwordCheck?.type === 'validate' && (
-                  <p className="help is-danger">Password fields don't match</p>
-                )}
-                {errors.passwordCheck?.type === 'required' && (
-                  <p className="help is-danger">This is a required field</p>
+                  <p className="help is-danger">
+                    Please make sure your password match.
+                  </p>
                 )}
               </div>
             </div>
@@ -175,7 +175,7 @@ function SignUp() {
             </div>
 
             <div class="has-text-centered">
-              Alreadyt have an account?
+              Already have an account?
               <Link to="./login">Sign in</Link>
             </div>
           </form>
