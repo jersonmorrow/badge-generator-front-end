@@ -11,7 +11,7 @@ function EventsListItem(props) {
   const { eventItem } = props;
   const eventId = eventItem._id;
   const [loading, setLoading] = useState(false);
-  const [eventImage] = useState(eventItem.eventImage || defaultImage);
+  const [eventImage, setEventImage] = useState(defaultImage);
   const [date, setDate] = useState('');
 
   const { modal, handleOpenModal, handleCloseModal } = useDeleteItems();
@@ -36,6 +36,13 @@ function EventsListItem(props) {
   };
 
   useEffect(() => {
+    const getImage = () => {
+      if (eventItem.eventImage) {
+        setEventImage(`http://localhost:5000/${eventItem.eventImage}`);
+      }
+    };
+
+    getImage();
     formatDate();
   });
 

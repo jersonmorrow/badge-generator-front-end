@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BadgeForm from '../features/badges/badgeForm';
 import Badge from '../features/badges/badge';
 import { useForm } from 'react-hook-form';
 import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 import PageLoading from '../features/loaders/pageLoading';
-import defaultImage from '../assets/default-image.png';
 import defaultBackgroundImage from '../assets/default-background-image.png';
+import defaultImage from '../assets/default-image.png';
 import PageError from '../pages/PageError';
 
 function NewBadge(props) {
@@ -20,7 +20,18 @@ function NewBadge(props) {
   const [error, setError] = useState(null);
   const history = useHistory();
   const watchAllFields = watch();
-  const eventLogo = localStorage.getItem('event-logo');
+  const [picture, setPicture] = useState(defaultImage);
+
+  useEffect(() => {
+    const getEventLogo = () => {
+      const eventLogo = localStorage.getItem('event-logo');
+      if (eventLogo !== 'undefined') {
+        setPicture(`http://localhost:5000/${eventLogo}`);
+      }
+    };
+
+    getEventLogo();
+  }, []);
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
@@ -60,7 +71,7 @@ function NewBadge(props) {
               jobTitle={watchAllFields.jobTitle || 'JOBTITLE'}
               categorie={watchAllFields.categorie || 'CATEGORIE'}
               badgeImage={watchAllFields.badgeImage || defaultBackgroundImage}
-              eventLogo={eventLogo || defaultImage}
+              eventLogo={picture}
             />
           </div>
           <div className="column is-two-fifths">

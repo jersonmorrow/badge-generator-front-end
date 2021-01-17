@@ -23,7 +23,7 @@ function BadgeDetails(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const eventLogo = localStorage.getItem('event-logo');
+  const [picture, setPicture] = useState(defaultImage);
   const eventId = localStorage.getItem('event-id');
   const componentRef = createRef();
 
@@ -32,6 +32,15 @@ function BadgeDetails(props) {
   });
 
   useEffect(() => {
+    const getEventLogo = () => {
+      const eventLogo = localStorage.getItem('event-logo');
+      if (eventLogo !== 'undefined') {
+        setPicture(`http://localhost:5000/${eventLogo}`);
+      }
+    };
+
+    getEventLogo();
+
     fetchData();
   }, []);
 
@@ -78,7 +87,7 @@ function BadgeDetails(props) {
                 jobTitle={badge.jobTitle || 'JOBTITLE'}
                 categorie={badge.categorie || 'CATEGORIE'}
                 badgeImage={badge.badgeImage || defaultBackgroundImage}
-                eventLogo={eventLogo || defaultImage}
+                eventLogo={picture}
               />
             )}
           </div>

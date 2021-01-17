@@ -12,13 +12,13 @@ function EventForm(props) {
     setPicture(URL.createObjectURL(e.target.files[0]));
   };
 
-  const getEventImage = () => {
-    if (eventImage) {
-      setPicture(eventImage);
-    }
-  };
-
   useEffect(() => {
+    const getEventImage = () => {
+      if (eventImage) {
+        setPicture(`http://localhost:5000/${eventImage}`);
+      }
+    };
+
     getEventImage();
   }, []);
 

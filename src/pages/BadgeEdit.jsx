@@ -22,8 +22,8 @@ function BadgeEdit(props) {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [picture, setPicture] = useState(defaultImage);
 
-  const eventLogo = localStorage.getItem('event-logo');
   const eventId = localStorage.getItem('event-id');
   const history = useHistory();
 
@@ -36,6 +36,14 @@ function BadgeEdit(props) {
   const watchAllFields = watch();
 
   useEffect(() => {
+    const getEventLogo = () => {
+      const eventLogo = localStorage.getItem('event-logo');
+      if (eventLogo !== 'undefined') {
+        setPicture(`http://localhost:5000/${eventLogo}`);
+      }
+    };
+
+    getEventLogo();
     fetchData();
   }, []);
 
@@ -100,7 +108,7 @@ function BadgeEdit(props) {
                 jobTitle={watchAllFields.jobTitle || 'jobTitle'}
                 categorie={watchAllFields.categorie || 'Categorie'}
                 badgeImage={watchAllFields.badgeImage || defaultBackgroundImage}
-                eventLogo={eventLogo || defaultImage}
+                eventLogo={picture}
               />
             )}
           </div>
