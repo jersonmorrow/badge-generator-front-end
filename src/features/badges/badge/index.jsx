@@ -26,7 +26,7 @@ const Badge = forwardRef((props, componentRef) => {
     >
       <div>
         <figure className="image is-96x96">
-          <img className="is-rounded" src={eventLogo} />
+          <img className="is-rounded" alt="eventLogo" src={eventLogo} />
         </figure>
       </div>
       <div>
@@ -38,7 +38,7 @@ const Badge = forwardRef((props, componentRef) => {
         <p>{email}</p>
         <p>{jobTitle}</p>
         <p className="mt-3">
-          <span class="tag is-primary is-light is-medium">{categorie}</span>
+          <span className="tag is-primary is-light is-medium">{categorie}</span>
         </p>
       </div>
     </div>

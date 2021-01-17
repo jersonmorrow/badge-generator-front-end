@@ -59,7 +59,7 @@ function EventsListItem(props) {
             width="90px"
             className="is-rounded is-vcentered"
             src={eventImage}
-            alt="event-image"
+            alt="eventLogo"
           />
         </figure>
         <div className="ml-5">
@@ -76,15 +76,15 @@ function EventsListItem(props) {
         <p className="control">
           <Link className="button is-success" to={`/${eventId}/badges`}>
             <span>Badges</span>
-            <span class="icon is-small">
-              <i class="fas fa-id-badge"></i>
+            <span className="icon is-small">
+              <i className="fas fa-id-badge"></i>
             </span>
           </Link>
         </p>
         <p className="control">
           <Link className="button is primary" to={`/${eventId}/edit`}>
-            <span class="icon is-small">
-              <i class="fas fa-edit"></i>
+            <span className="icon is-small">
+              <i className="fas fa-edit"></i>
             </span>
           </Link>
         </p>
@@ -94,8 +94,8 @@ function EventsListItem(props) {
             onClick={handleOpenModal}
             className="button is-danger is-normal"
           >
-            <span class="icon is-small">
-              <i class="fas fa-trash-alt"></i>
+            <span className="icon is-small">
+              <i className="fas fa-trash-alt"></i>
             </span>
           </button>
           <DeleteModal

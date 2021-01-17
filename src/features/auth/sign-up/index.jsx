@@ -179,7 +179,7 @@ function SignUp() {
                   Sign up
                 </button>
               </div>
-              <div class="has-text-centered">
+              <div className="has-text-centered">
                 <p>Already have an account?</p>
 
                 <Link to="./login">Log in</Link>

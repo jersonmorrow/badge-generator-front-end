@@ -128,7 +128,7 @@ function EventForm(props) {
                   width="96px"
                   className="is-rounded"
                   src={picture}
-                  alt="event-image"
+                  alt="event-logo"
                 />
               </figure>
             </div>

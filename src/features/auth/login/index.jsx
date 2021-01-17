@@ -110,7 +110,7 @@ function Login() {
                 >
                   Log in
                 </button>
-                <div class="has-text-centered">
+                <div className="has-text-centered">
                   <p>Don't have an account?</p>
 
                   <Link to="./sign-up">Sign up</Link>

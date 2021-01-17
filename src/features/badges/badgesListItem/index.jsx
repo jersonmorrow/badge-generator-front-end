@@ -47,7 +47,7 @@ function BadgesListItem(props) {
             width="90px"
             className="is-rounded is-vcentered"
             src={eventLogo}
-            alt="event-image"
+            alt="event-logo"
           />
         </figure>
         <div className="ml-5">
@@ -58,7 +58,7 @@ function BadgesListItem(props) {
           <p className="subtitle is-6 m-0">{badgeItem.jobTitle}</p>
           <div>
             <p className="subtitle is-6 mt-3">
-              <span class="tag is-primary is-light is-medium">
+              <span className="tag is-primary is-light is-medium">
                 {badgeItem.categorie}
               </span>
             </p>
@@ -70,16 +70,16 @@ function BadgesListItem(props) {
         <p className="control">
           <Link className="button is-success" to={`/badges/${badgeId}`}>
             <span>Print Badge</span>
-            <span class="icon is-small">
-              <i class="fas fa-print"></i>
+            <span className="icon is-small">
+              <i className="fas fa-print"></i>
             </span>
           </Link>
         </p>
 
         <p className="control">
           <Link className="button" to={`/${badgeId}/edit-badge`}>
-            <span class="icon is-small">
-              <i class="fas fa-edit"></i>
+            <span className="icon is-small">
+              <i className="fas fa-edit"></i>
             </span>
           </Link>
         </p>
@@ -89,8 +89,8 @@ function BadgesListItem(props) {
             onClick={handleOpenModal}
             className="button is-danger is-normal"
           >
-            <span class="icon is-small">
-              <i class="fas fa-trash-alt"></i>
+            <span className="icon is-small">
+              <i className="fas fa-trash-alt"></i>
             </span>
           </button>
           <DeleteModal

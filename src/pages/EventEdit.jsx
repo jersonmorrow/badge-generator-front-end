@@ -8,7 +8,6 @@ import PageError from '../pages/PageError';
 
 function EventEdit(props) {
   const [data, setData] = useState({});
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
@@ -23,32 +22,32 @@ function EventEdit(props) {
   );
 
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const dataResponse = await api.events.read(eventId);
+        setData(dataResponse);
+        setLoading(false);
+        reset({
+          title: dataResponse.title,
+          organizer: dataResponse.organizer,
+          location: dataResponse.location,
+          date: new Date(dataResponse.date),
+          eventImage: dataResponse.eventImage,
+        });
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+        console.log(error);
+      }
+    };
+
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const dataResponse = await api.events.read(eventId);
-      setData(dataResponse);
-      setLoading(false);
-      reset({
-        title: dataResponse.title,
-        organizer: dataResponse.organizer,
-        location: dataResponse.location,
-        date: new Date(dataResponse.date),
-        eventImage: dataResponse.eventImage,
-      });
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-      console.log(error);
-    }
-  };
-
-  const onSubmit = async (data, e) => {
+  async function onSubmit(data, e) {
     e.preventDefault();
     setLoading(true);
 
@@ -70,7 +69,7 @@ function EventEdit(props) {
       setError(error);
       setLoading(false);
     }
-  };
+  }
 
   if (loading) {
     return <PageLoading />;
