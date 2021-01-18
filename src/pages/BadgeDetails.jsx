@@ -7,6 +7,7 @@ import { useReactToPrint } from 'react-to-print';
 import Loader from 'react-loader-spinner';
 import api from '../api/api.js';
 import PageError from '../pages/PageError';
+import config from '../config/index';
 
 function BadgeDetails(props) {
   const [badge, setBadge] = useState({
@@ -35,7 +36,7 @@ function BadgeDetails(props) {
     const getEventLogo = () => {
       const eventLogo = localStorage.getItem('event-logo');
       if (eventLogo !== 'undefined') {
-        setPicture(`http://localhost:5000/${eventLogo}`);
+        setPicture(`${config.apiUrl}/${eventLogo}`);
       }
     };
 

@@ -6,6 +6,7 @@ import Axios from 'axios';
 import { checkUser } from '../../../services/checkUser';
 import homeBackground from '../../../assets/login-image.jpg';
 import logo from '../../../assets/logo.png';
+import config from '../../../config/index';
 
 function SignUp() {
   const { register, handleSubmit, errors, formState, getValues } = useForm({
@@ -18,17 +19,14 @@ function SignUp() {
   const onSubmit = async (data, e) => {
     e.preventDefault();
 
-    await Axios.post('http://localhost:5000/users/sign-up', data);
+    await Axios.post(`${config.apiUrl}/users/sign-up`, data);
 
     const { email, password } = data;
     Axios.defaults.withCredentials = true;
-    const loginResponse = await Axios.post(
-      'http://localhost:5000/users/login',
-      {
-        email,
-        password,
-      }
-    );
+    const loginResponse = await Axios.post(`${config.apiUrl}/users/login`, {
+      email,
+      password,
+    });
     setUserData({
       user: loginResponse.data.user,
     });

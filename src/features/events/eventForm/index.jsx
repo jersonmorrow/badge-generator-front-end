@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import defaultImage from '../../../assets/default-image.png';
+import config from '../../../config/index';
 
 function EventForm(props) {
   const { onSubmit, register, errors, control, formState, eventImage } = props;
@@ -15,7 +16,7 @@ function EventForm(props) {
   useEffect(() => {
     const getEventImage = () => {
       if (eventImage) {
-        setPicture(`http://localhost:5000/${eventImage}`);
+        setPicture(`${config.apiUrl}/${eventImage}`);
       }
     };
 
@@ -132,7 +133,7 @@ function EventForm(props) {
                 />
               </figure>
             </div>
-            <div className="mt-2 ml-1 file is-small">
+            <div className="mt-2 file is-small">
               <label className="file-label">
                 <input
                   className="file-input"
@@ -147,7 +148,7 @@ function EventForm(props) {
                   <span className="file-icon">
                     <i className="fas fa-upload"></i>
                   </span>
-                  <span className="file-label">Upload</span>
+                  <span className="file-label">Event logo</span>
                 </span>
               </label>
             </div>

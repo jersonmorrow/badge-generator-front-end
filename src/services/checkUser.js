@@ -1,9 +1,10 @@
 import Axios from 'axios';
+import config from '../config/index';
 
 export async function checkUser(value) {
   try {
     const checkUserResponse = await Axios.post(
-      'http://localhost:5000/users/check-user',
+      `${config.apiUrl}/users/check-user`,
       {
         email: value,
       }
@@ -22,7 +23,7 @@ export async function checkUser(value) {
 export async function checkUserLogin(value) {
   try {
     const checkUserResponse = await Axios.post(
-      'http://localhost:5000/users/check-user',
+      `${config.apiUrl}/users/check-user`,
       {
         email: value,
       }

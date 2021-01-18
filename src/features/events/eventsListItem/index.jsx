@@ -6,6 +6,7 @@ import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import api from '../../../api/api';
+import config from '../../../config/index';
 
 function EventsListItem(props) {
   const { eventItem } = props;
@@ -38,7 +39,7 @@ function EventsListItem(props) {
   useEffect(() => {
     const getImage = () => {
       if (eventItem.eventImage) {
-        setEventImage(`http://localhost:5000/${eventItem.eventImage}`);
+        setEventImage(`${config.apiUrl}/${eventItem.eventImage}`);
       }
     };
 

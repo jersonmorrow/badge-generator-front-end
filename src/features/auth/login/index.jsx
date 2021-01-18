@@ -7,6 +7,7 @@ import { checkUserLogin } from '../../../services/checkUser';
 import ErrorNotice from '../../../misc/ErrorNotice';
 import logo from '../../../assets/logo.png';
 import homeBackground from '../../../assets/login-image.jpg';
+import config from '../../../config/index';
 
 function Login() {
   Axios.defaults.withCredentials = true;
@@ -23,13 +24,10 @@ function Login() {
     try {
       e.preventDefault();
       const { email, password } = data;
-      const loginResponse = await Axios.post(
-        'http://localhost:5000/users/login',
-        {
-          email,
-          password,
-        }
-      );
+      const loginResponse = await Axios.post(`${config.apiUrl}/users/login`, {
+        email,
+        password,
+      });
       setUserData({
         user: loginResponse.data.user,
       });

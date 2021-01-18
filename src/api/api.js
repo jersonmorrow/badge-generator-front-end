@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import config from '../config/index';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const randomNumber = (min = 0, max = 1) =>
@@ -7,7 +8,7 @@ const simulateNetworkLatency = (min = 30, max = 1500) =>
   delay(randomNumber(min, max));
 
 const instance = Axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: `${config.apiUrl}`,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
