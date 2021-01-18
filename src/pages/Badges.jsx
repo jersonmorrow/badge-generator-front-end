@@ -54,7 +54,15 @@ function Badges(props) {
       <div className="container">
         <div className="columns">
           <div className="column is-three-fifths is-offset-one-fifth">
-            <div className="is-flex is-justify-content-flex-end	">
+            <div className="is-flex is-justify-content-space-between mb-5">
+              <Link to="/events">
+                <span className="icon-text">
+                  <span className="icon is-large">
+                    <i className="fas fa-lg fa-home"></i>
+                  </span>
+                  <span>Home</span>
+                </span>
+              </Link>
               <Link className="button is-success" to={`/${eventId}/new-badge`}>
                 New Badge
               </Link>

@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: process.env.REACT_APP_API_URL,
+  apiUrl: 'https://badge-generator-api.herokuapp.com',
 };
 
 export default config;
