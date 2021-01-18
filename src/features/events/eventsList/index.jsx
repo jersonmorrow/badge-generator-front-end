@@ -17,15 +17,18 @@ function EventsList(props) {
           </div>
         </div>
 
-        <h3>No Events were found!</h3>
+        <h3>No Events were found, let's create a new event!</h3>
+        <Link className="button is-success" to="/new-event">
+          New Event
+        </Link>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="columns">
-        <div className="column">
+      <div className="mb-5">
+        <div>
           <SearchEvents query={query} setQuery={setQuery} />
         </div>
       </div>

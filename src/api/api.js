@@ -1,20 +1,13 @@
 import Axios from 'axios';
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const randomNumber = (min = 0, max = 1) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-const simulateNetworkLatency = (min = 30, max = 1500) =>
-  delay(randomNumber(min, max));
+import config from '../config/index';
 
 const instance = Axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: `${config.apiUrl}`,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
 
 async function callApi(endpoint, options) {
-  await simulateNetworkLatency();
-
   const response = await instance(endpoint, options);
   const data = await response.data;
 

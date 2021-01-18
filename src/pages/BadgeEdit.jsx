@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import defaultBackgroundImage from '../assets/default-background-image.png';
 import Loader from 'react-loader-spinner';
 import PageError from '../pages/PageError';
+import config from '../config/index';
 
 function BadgeEdit(props) {
   const [badge, setBadge] = useState({
@@ -22,8 +23,8 @@ function BadgeEdit(props) {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [picture, setPicture] = useState(defaultImage);
 
-  const eventLogo = localStorage.getItem('event-logo');
   const eventId = localStorage.getItem('event-id');
   const history = useHistory();
 
@@ -36,6 +37,14 @@ function BadgeEdit(props) {
   const watchAllFields = watch();
 
   useEffect(() => {
+    const getEventLogo = () => {
+      const eventLogo = localStorage.getItem('event-logo');
+      if (eventLogo !== 'undefined') {
+        setPicture(`${config.apiUrl}/${eventLogo}`);
+      }
+    };
+
+    getEventLogo();
     fetchData();
   }, []);
 
@@ -58,7 +67,6 @@ function BadgeEdit(props) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    console.log(data);
 
     try {
       await api.badges.update(data, badgeId);
@@ -100,7 +108,7 @@ function BadgeEdit(props) {
                 jobTitle={watchAllFields.jobTitle || 'jobTitle'}
                 categorie={watchAllFields.categorie || 'Categorie'}
                 badgeImage={watchAllFields.badgeImage || defaultBackgroundImage}
-                eventLogo={eventLogo || defaultImage}
+                eventLogo={picture}
               />
             )}
           </div>

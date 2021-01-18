@@ -7,6 +7,7 @@ import { useReactToPrint } from 'react-to-print';
 import Loader from 'react-loader-spinner';
 import api from '../api/api.js';
 import PageError from '../pages/PageError';
+import config from '../config/index';
 
 function BadgeDetails(props) {
   const [badge, setBadge] = useState({
@@ -23,7 +24,7 @@ function BadgeDetails(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const eventLogo = localStorage.getItem('event-logo');
+  const [picture, setPicture] = useState(defaultImage);
   const eventId = localStorage.getItem('event-id');
   const componentRef = createRef();
 
@@ -32,6 +33,15 @@ function BadgeDetails(props) {
   });
 
   useEffect(() => {
+    const getEventLogo = () => {
+      const eventLogo = localStorage.getItem('event-logo');
+      if (eventLogo !== 'undefined') {
+        setPicture(`${config.apiUrl}/${eventLogo}`);
+      }
+    };
+
+    getEventLogo();
+
     fetchData();
   }, []);
 
@@ -78,7 +88,7 @@ function BadgeDetails(props) {
                 jobTitle={badge.jobTitle || 'JOBTITLE'}
                 categorie={badge.categorie || 'CATEGORIE'}
                 badgeImage={badge.badgeImage || defaultBackgroundImage}
-                eventLogo={eventLogo || defaultImage}
+                eventLogo={picture}
               />
             )}
           </div>

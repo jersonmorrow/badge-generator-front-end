@@ -1,16 +1,17 @@
 import Axios from 'axios';
+import config from '../config/index';
 
 export const checkLoggedIn = async (setUserData) => {
   let user = localStorage.getItem('user');
 
   if (user) {
     const validateUser = await Axios.post(
-      'http://localhost:5000/users/tokenIsValid',
+      `${config.apiUrl}/users/tokenIsValid`,
       null,
       { withCredentials: true }
     );
     if (validateUser.data) {
-      const userResponse = await Axios.get('http://localhost:5000/users/', {
+      const userResponse = await Axios.get(`${config.apiUrl}/users/`, {
         withCredentials: true,
       });
       setUserData({

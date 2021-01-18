@@ -9,7 +9,7 @@ function DeleteModal(props) {
       <div className="is-flex is-flex-direction-column is-justify-content-center	is-align-items-center">
         <div className="mb-4 is-flex is-flex-direction-column is-justify-content-center	is-align-items-center">
           <h1>Are you Sure?</h1>
-          <p>You're about to delete this event.</p>
+          <p>You're about to delete this item.</p>
         </div>
         <div className="field is-grouped ">
           <p className="control">

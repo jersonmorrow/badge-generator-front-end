@@ -18,7 +18,7 @@ function BadgesList(props) {
           </div>
         </div>
 
-        <h3>No Badges were found, let's create a new badge</h3>
+        <h3>No Badges were found, let's create a new badge!</h3>
         <Link className="button is-success" to={`/${eventId}/new-badge`}>
           New Badge
         </Link>
@@ -28,8 +28,8 @@ function BadgesList(props) {
 
   return (
     <div>
-      <div className="columns">
-        <div className="column">
+      <div className="mb-5">
+        <div>
           <SearchBadges query={query} setQuery={setQuery} />
         </div>
       </div>
@@ -42,9 +42,7 @@ function BadgesList(props) {
         {filteredItems.map((badgeItem) => {
           return (
             <li className="box" key={badgeItem._id}>
-              <Link to={`/badges/${badgeItem._id}`}>
-                <BadgesListItem eventLogo={eventLogo} badgeItem={badgeItem} />
-              </Link>
+              <BadgesListItem eventLogo={eventLogo} badgeItem={badgeItem} />
             </li>
           );
         })}
