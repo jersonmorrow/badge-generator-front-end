@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../../context/userContext';
 import Axios from 'axios';
+import config from '../../../config/index';
 
 function AuthOptions() {
   const { userData, setUserData } = useContext(UserContext);
@@ -11,7 +12,7 @@ function AuthOptions() {
   const signup = () => history.push('./sign-up');
   const login = () => history.push('./login');
   const logout = async () => {
-    await Axios.post('http://localhost:5000/users/logout', {
+    await Axios.post(`${config.apiUrl}/users/logout`, {
       withCredentials: true,
     });
     setUserData({
