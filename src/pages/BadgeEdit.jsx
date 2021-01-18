@@ -67,7 +67,6 @@ function BadgeEdit(props) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    console.log(data);
 
     try {
       await api.badges.update(data, badgeId);
