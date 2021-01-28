@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: 'https://badge-generator-api.herokuapp.com',
+  apiUrl: 'http://localhost:5000',
 };
 
 export default config;
