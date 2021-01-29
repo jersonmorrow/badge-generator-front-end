@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import api from '../api/api.js';
 import { useHistory } from 'react-router-dom';
 import useSetFormData from '../hooks/useSetFormData';
+import Loader from 'react-loader-spinner';
 
 function NewEvent() {
   const { register, handleSubmit, control, errors, formState } = useForm({
@@ -12,19 +13,34 @@ function NewEvent() {
   });
   const { setFormData } = useSetFormData();
   const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const payload = new FormData();
       setFormData(data, payload, imageUrl);
       await api.events.create(payload);
-      // history.push('/events');
+      history.push('/events');
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <Loader
+        type="ThreeDots"
+        color="#00BFFF"
+        height={30}
+        width={30}
+        timeout={3000}
+      />
+    );
+  }
 
   return (
     <section className="section">

@@ -1,8 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import config from '../config/index';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDxbE2B5UElIhvzZLvLvbxcmSV48d2tFPQ',
+  apiKey: config.firebaseApiKey,
   authDomain: 'badge-generator-adb42.firebaseapp.com',
   projectId: 'badge-generator-adb42',
   storageBucket: 'badge-generator-adb42.appspot.com',
