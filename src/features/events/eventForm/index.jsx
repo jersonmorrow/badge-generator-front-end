@@ -5,18 +5,31 @@ import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import defaultImage from '../../../assets/default-image.png';
 import config from '../../../config/index';
+import useUploadImage from '../../../hooks/useUploadImage';
 
 function EventForm(props) {
-  const { onSubmit, register, errors, control, formState, eventImage } = props;
-  const [picture, setPicture] = useState(defaultImage);
+  const {
+    onSubmit,
+    register,
+    errors,
+    control,
+    formState,
+    eventImage,
+    setImageUrl,
+  } = props;
+  const { uploadImage } = useUploadImage();
+  const [image, setImage] = useState(defaultImage);
+
   const onChangePicture = (e) => {
-    setPicture(URL.createObjectURL(e.target.files[0]));
+    const data = e.target.files[0];
+    setImage(URL.createObjectURL(data));
+    uploadImage(data, setImageUrl);
   };
 
   useEffect(() => {
     const getEventImage = () => {
       if (eventImage) {
-        setPicture(`${config.apiUrl}/${eventImage}`);
+        setImage(`${config.apiUrl}/${eventImage}`);
       }
     };
 
@@ -128,7 +141,7 @@ function EventForm(props) {
                 <img
                   width="96px"
                   className="is-rounded"
-                  src={picture}
+                  src={image}
                   alt="event-logo"
                 />
               </figure>
@@ -140,11 +153,11 @@ function EventForm(props) {
                   type="file"
                   accept="image/png, image/jpeg"
                   multiple="false"
-                  name="img"
+                  name="eventImage"
                   ref={register}
                   onChange={onChangePicture}
                 />
-                <span className="file-cta">
+                <span onClick className="file-cta">
                   <span className="file-icon">
                     <i className="fas fa-upload"></i>
                   </span>
