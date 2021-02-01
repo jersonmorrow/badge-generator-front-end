@@ -6,6 +6,7 @@ import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import api from '../../../api/api';
+import { storage } from '../../../firebase';
 
 function EventsListItem(props) {
   const { eventItem } = props;
@@ -14,12 +15,18 @@ function EventsListItem(props) {
   const [eventImage, setEventImage] = useState(defaultImage);
   const [date, setDate] = useState('');
 
-  const { modal, handleOpenModal, handleCloseModal } = useDeleteItems();
+  const {
+    modal,
+    handleOpenModal,
+    handleCloseModal,
+    deleteImage,
+  } = useDeleteItems();
 
   const handleDeleteEvent = async (e) => {
     setLoading(true);
 
     try {
+      deleteImage(eventImage, storage);
       await api.events.remove(eventId);
       handleCloseModal();
       setLoading(true);
