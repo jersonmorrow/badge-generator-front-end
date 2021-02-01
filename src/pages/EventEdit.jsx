@@ -5,19 +5,24 @@ import { useHistory } from 'react-router-dom';
 import EventForm from '../features/events/eventForm';
 import { useForm } from 'react-hook-form';
 import PageError from '../pages/PageError';
+import useSetFormData from '../hooks/useSetFormData/index.jsx';
+import useDeleteItems from '../hooks/useDeleteItems/index.jsx';
 
 function EventEdit(props) {
-  const [data, setData] = useState({});
+  const [eventData, setEventData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { eventId } = props.match.params;
+  const { setFormData } = useSetFormData();
+  const [imageUrl, setImageUrl] = useState('');
   const history = useHistory();
+  const { updateImage } = useDeleteItems();
 
   const { register, handleSubmit, control, errors, formState, reset } = useForm(
     {
       mode: 'onChange',
       reValidateMode: 'onChange',
-      values: useMemo(() => data, [data]),
+      values: useMemo(() => eventData, [eventData]),
     }
   );
 
@@ -28,14 +33,13 @@ function EventEdit(props) {
 
       try {
         const dataResponse = await api.events.read(eventId);
-        setData(dataResponse);
+        setEventData(dataResponse);
         setLoading(false);
         reset({
           title: dataResponse.title,
           organizer: dataResponse.organizer,
           location: dataResponse.location,
           date: new Date(dataResponse.date),
-          eventImage: dataResponse.eventImage,
         });
       } catch (error) {
         setError(error);
@@ -47,20 +51,14 @@ function EventEdit(props) {
     fetchData();
   }, []);
 
-  async function onSubmit(data, e) {
+  const onSubmit = async (data, e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const { title, organizer, location, date, img } = data;
-
-    const payload = new FormData();
-    payload.append('title', title);
-    payload.append('organizer', organizer);
-    payload.append('location', location);
-    payload.append('date', date);
-    payload.append('eventImage', img[0]);
 
     try {
+      setLoading(true);
+      const payload = new FormData();
+      setFormData(data, payload, imageUrl);
+      updateImage(imageUrl, eventData);
       await api.events.update(eventId, payload);
       history.push('/events');
       setLoading(false);
@@ -69,7 +67,7 @@ function EventEdit(props) {
       setError(error);
       setLoading(false);
     }
-  }
+  };
 
   if (loading) {
     return <PageLoading />;
@@ -95,7 +93,8 @@ function EventEdit(props) {
               errors={errors}
               control={control}
               formState={formState}
-              eventImage={data.eventImage}
+              eventImage={eventData.eventImage}
+              setImageUrl={setImageUrl}
             />
           </div>
         </div>

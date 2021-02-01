@@ -4,7 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import defaultImage from '../../../assets/default-image.png';
-import config from '../../../config/index';
 import useUploadImage from '../../../hooks/useUploadImage';
 
 function EventForm(props) {
@@ -18,22 +17,22 @@ function EventForm(props) {
     setImageUrl,
   } = props;
   const { uploadImage } = useUploadImage();
-  const [image, setImage] = useState(defaultImage);
+  const [image, setEventImage] = useState(defaultImage);
 
   const onChangePicture = (e) => {
     const data = e.target.files[0];
-    setImage(URL.createObjectURL(data));
+    setEventImage(URL.createObjectURL(data));
     uploadImage(data, setImageUrl);
   };
 
   useEffect(() => {
-    const getEventImage = () => {
+    const getImage = () => {
       if (eventImage) {
-        setImage(`${config.apiUrl}/${eventImage}`);
+        setEventImage(eventImage);
       }
     };
 
-    getEventImage();
+    getImage();
   }, []);
 
   return (

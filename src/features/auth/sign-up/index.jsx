@@ -30,7 +30,7 @@ function SignUp() {
     setUserData({
       user: loginResponse.data.user,
     });
-    localStorage.setItem('user', loginResponse.data.user);
+    localStorage.setItem('user', JSON.stringify(loginResponse.data.user));
     history.push('/events');
   };
 

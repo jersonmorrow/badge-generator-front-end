@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { storage } from '../../firebase';
-import UserContext from '../../context/userContext';
 
 function useUploadImage() {
-  const { userData } = useContext(UserContext);
-  let userId = userData.user.id;
+  let storageUser = localStorage.getItem('user');
+  let user = JSON.parse(storageUser);
+  let userId = user.id;
 
   const uploadImage = (data, setImageUrl) => {
     const storageRef = storage.ref();

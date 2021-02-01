@@ -6,7 +6,6 @@ import useDeleteItems from '../../../hooks/useDeleteItems';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import api from '../../../api/api';
-import { storage } from '../../../firebase';
 
 function EventsListItem(props) {
   const { eventItem } = props;
@@ -26,7 +25,7 @@ function EventsListItem(props) {
     setLoading(true);
 
     try {
-      deleteImage(eventImage, storage);
+      deleteImage(eventImage);
       await api.events.remove(eventId);
       handleCloseModal();
       setLoading(true);
