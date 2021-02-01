@@ -8,7 +8,6 @@ import PageLoading from '../features/loaders/pageLoading';
 import defaultBackgroundImage from '../assets/default-background-image.png';
 import defaultImage from '../assets/default-image.png';
 import PageError from '../pages/PageError';
-import config from '../config/index';
 
 function NewBadge(props) {
   const { register, handleSubmit, errors, watch, formState } = useForm({
@@ -27,7 +26,7 @@ function NewBadge(props) {
     const getEventLogo = () => {
       const eventLogo = localStorage.getItem('event-logo');
       if (eventLogo !== 'undefined') {
-        setPicture(`${config.apiUrl}/${eventLogo}`);
+        setPicture(eventLogo);
       }
     };
 

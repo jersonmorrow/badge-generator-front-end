@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form';
 import defaultBackgroundImage from '../assets/default-background-image.png';
 import Loader from 'react-loader-spinner';
 import PageError from '../pages/PageError';
-import config from '../config/index';
 
 function BadgeEdit(props) {
   const [badge, setBadge] = useState({
@@ -40,7 +39,7 @@ function BadgeEdit(props) {
     const getEventLogo = () => {
       const eventLogo = localStorage.getItem('event-logo');
       if (eventLogo !== 'undefined') {
-        setPicture(`${config.apiUrl}/${eventLogo}`);
+        setPicture(eventLogo);
       }
     };
 

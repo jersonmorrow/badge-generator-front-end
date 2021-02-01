@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: 'http://localhost:5000',
+  apiUrl: 'https://badge-generator-api.herokuapp.com',
   firebaseApiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 };
 
