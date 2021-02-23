@@ -4,6 +4,9 @@
 # Optional eslint cache
 .eslintcache
 
+/dist
+
 .env
+env.json
 
 

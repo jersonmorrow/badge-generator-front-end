@@ -9,6 +9,7 @@
     "axios": "^0.21.0",
     "bulma": "^0.9.1",
     "firebase": "^8.2.4",
+    "firebase-functions": "^3.13.1",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
